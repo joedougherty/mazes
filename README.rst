@@ -52,6 +52,18 @@ Representation of a graph as a Tree
 Representation of a graph as an Adjacency Matrix
 ------------------------------------------------
 
+An *N* x *N* matrix where each cell contains either ``0`` or ``1``.
+
+
++ ``0``: There is no connection between the two nodes given by ``row``, ``col``.
++ ``1``: There is a connection between the two nodes given by ``row``, ``col``.
+
+**Example**:
+
+As in the tree above, we can see there's a connection between ``A`` and ``C``.
+
+To check the Adjancency Matrix, we look in one of the two cells that represent that connection.
+
 .. code-block:: python
     
     adj_matrix = [
@@ -62,6 +74,12 @@ Representation of a graph as an Adjacency Matrix
         [0, 1, 0, 0, 0], # D
         [0, 1, 0, 0, 0], # E
     ]
+
+
+The cells ``adj_matrix[0][2]`` and ``adj_matrix[2][0]`` both contain ``1`` -- the cells are connected.
+
+.. ATTENTION::
+    Note that this representation repeats information. Each (possible) node connection is specified twice.
 
 
 Representation of a graph as an Adjacency List
