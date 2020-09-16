@@ -56,13 +56,13 @@ class Maze:
         self.path = path
         self.wall = wall
         self.cell_width = cell_width
-        self.pretty_path = matrix2str(self.extract_path(self.cell_width))
+        self.pretty_path = matrix2str(self.diagram_path(self.cell_width))
 
     def count_path_nodes(self):
         ''' Returns the total number of nodes that match `self.path` in self.matrix '''
         return sum([r.count(self.path) for r in self.matrix])
 
-    def extract_path(self, int_width=None):
+    def diagram_path(self, int_width=None):
         ''' 
         A graphic representation of the nodes. 
         Each is assigned an autoincremented id when it is discovered.
