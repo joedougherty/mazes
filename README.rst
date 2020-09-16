@@ -92,3 +92,6 @@ https://www.dcode.fr/maze-generator
 
 
 https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/describing-graphs
+
+
+https://py.checkio.org/en/mission/open-labyrinth/share/574bd1ded68c9705c5d6f07c6206be12/
