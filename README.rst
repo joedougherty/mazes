@@ -110,7 +110,7 @@ Adjacency Matrix Example
 
 .. ATTENTION::
 
-    Note that this representation potentially makes it less efficient to check if two nodes are conencted.
+    Note that this representation potentially makes it less efficient to check if two nodes are connected.
 
 ---------
 Resources
