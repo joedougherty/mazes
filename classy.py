@@ -9,14 +9,14 @@ t = Terminal()
 
 
 class Cell:
-    '''
+    """
     A representation of a cell in the maze.
 
     :param coords: Coordinates (row, col)
     :type  coords: tuple
 
     :param neighbors: List of neighboring cells as coords (see above)
-    :type  neighbors: list 
+    :type  neighbors: list
 
     :param row: Row ID
     :type  row: int
@@ -29,7 +29,8 @@ class Cell:
 
     :param is_dead_end: Does this cell have exactly one neighbor?
     :type  is_dead_end: bool
-    '''
+    """
+
     def __init__(self, coords, neighbors=None, traversal_mode=False):
         self.coords = coords
         if neighbors:
@@ -45,7 +46,7 @@ class Cell:
         # This doesn't come into play until the traversal stage
         self.prev = None
         self.traversal_mode = traversal_mode
-    
+
     def __repr__(self):
         if self.traversal_mode:
             if self.prev:
@@ -57,14 +58,14 @@ class Cell:
 
 
 def matrix2str(m):
-    p = ''
+    p = ""
     for row in m:
-        p += ' '.join([str(e) for e in row]) + '\n'
+        p += " ".join([str(e) for e in row]) + "\n"
     return p
 
 
 class Maze:
-    '''
+    """
     Give me a matrix and I'll do some maze analysis. Sound good?
 
     :param matrix: Matrix representing the path/wall cells that compose the maze
@@ -82,7 +83,8 @@ class Maze:
     :param pretty_path: Representation of the path obtained by running `self.diagram_path`
     :type  pretty_path: str
 
-    '''
+    """
+
     def __init__(self, maze_as_matrix, path, wall, cell_width=2):
         self.matrix = maze_as_matrix
         self.path = path
@@ -103,22 +105,24 @@ class Maze:
             new_row = []
             for col in row:
                 if col == self.wall:
-                    new_row.append('#')
+                    new_row.append("#")
                 elif col == self.path:
-                    new_row.append(' ')
+                    new_row.append(" ")
                 else:
-                    raise ValueError('Matrices must be composed of only {self.path} and {self.wall}!') 
+                    raise ValueError(
+                        "Matrices must be composed of only {self.path} and {self.wall}!"
+                    )
             new_rep.append(new_row)
         print(matrix2str(new_rep))
 
     def count_path_nodes(self):
-        ''' Returns the total number of nodes that match `self.path` in self.matrix. '''
+        """ Returns the total number of nodes that match `self.path` in self.matrix. """
         return sum([r.count(self.path) for r in self.matrix])
 
     def diagram_path(self, int_width=None, highlight_cells=None):
-        ''' 
-        A graphic representation of the nodes. 
-        '''
+        """
+        A graphic representation of the nodes.
+        """
         if not highlight_cells:
             highlight_cells = []
 
@@ -133,30 +137,30 @@ class Maze:
             for c_idx, col in enumerate(row):
                 row_rep, col_rep = str(r_idx).zfill(2), str(c_idx).zfill(2)
 
-                coords_rep = f'''({row_rep}, {col_rep})'''
+                coords_rep = f"""({row_rep}, {col_rep})"""
                 if col == self.path and ((r_idx, c_idx) in highlight_cells):
                     new_row.append(t.bold_red(coords_rep))
                 elif col == self.path and (r_idx, c_idx) not in highlight_cells:
                     new_row.append(coords_rep)
                 else:
-                    new_row.append(" "*8)
+                    new_row.append(" " * 8)
 
             path.append(new_row)
         return path
 
     def discover_cell(self, coords):
-        '''
+        """
         Given coords (row, col):
             if that cell is a path cell:
                 return the coords (row, col)
             else:
                 # it's out of bounds or not a path cell
                 return False
-        '''
+        """
         width, height = len(self.matrix[0]), len(self.matrix)
         row, col = coords
 
-        if any((row < 0, row > height-1, col < 0, col > width-1)):
+        if any((row < 0, row > height - 1, col < 0, col > width - 1)):
             return False
         elif self.matrix[row][col] == self.path:
             return (row, col)
@@ -164,31 +168,31 @@ class Maze:
             return False
 
     def find_neighbors(self, coords):
-        '''
+        """
         Given coords (row, col):
             check the neighbors to the N, S, E, W
             if they contain coords, return them
 
         If no neighbors found, return []
-        '''
+        """
         row, col = coords
 
         visited = (
-            self.discover_cell((row-1, col)),  # North
-            self.discover_cell((row+1, col)),  # South
-            self.discover_cell((row, col-1)),  # East
-            self.discover_cell((row, col+1)),  # West
+            self.discover_cell((row - 1, col)),  # North
+            self.discover_cell((row + 1, col)),  # South
+            self.discover_cell((row, col - 1)),  # East
+            self.discover_cell((row, col + 1)),  # West
         )
         return [v for v in visited if isinstance(v, tuple)]
 
     def to_adjlist(self):
-        ''' 
+        """
         Creates an adjacency list from `self.matrix`.
 
         Returns adjacenct list as a dict where:
             key -> coords,
             val -> Cell objects (coords, found neighbors, etc.)
-        
+
         # EXAMPLE #
         matrix = [
            [0, 1],
@@ -203,30 +207,27 @@ class Maze:
             ((0, 0), (Neighbors=[(1, 0)], Intersection=False, Dead End=True),
             ((1, 0), (Neighbors=[(0, 0)], Intersection=False, Dead End=True)
         ])
-    
+
         In this example, either way you start the only way to finish is to go to the other.
-        '''
+        """
         cells = OrderedDict()
 
         for row_idx, row in enumerate(self.matrix):
             for col_idx, c in enumerate(row):
                 coords = (row_idx, col_idx)
                 if self.discover_cell(coords):
-                    new_cell = Cell(
-                        coords, 
-                        self.find_neighbors(coords)
-                    )
-                    cells.update({coords : new_cell})
+                    new_cell = Cell(coords, self.find_neighbors(coords))
+                    cells.update({coords: new_cell})
 
         return cells
 
     def bfs(self, start_coords, goal_coords):
-        '''
+        """
         Explores the Adjancency List `self.adjlist` for a path from `start_coords` to `goal_coords`.
 
         If found, returns a reference to found Cell at `goal_coords`.
         Otherwise, returns False.
-        '''
+        """
         to_visit = deque()
         visited = set()
 
@@ -244,7 +245,7 @@ class Maze:
 
             # Find adjacent edges that haven't been visited
             for coords in cell.neighbors:
-                next_cell = self.adjlist[coords] 
+                next_cell = self.adjlist[coords]
                 if next_cell not in visited:
                     next_cell.prev = cell
                     next_cell.traversal_mode = True
@@ -256,7 +257,7 @@ class Maze:
         cell_list = []
 
         found = self.bfs(start_coords, goal_coords)
-        
+
         if not found:
             return "No path found!"
 
