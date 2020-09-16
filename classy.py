@@ -81,7 +81,6 @@ class Maze:
 
     :param pretty_path: Representation of the path obtained by running `self.diagram_path`
     :type  pretty_path: str
-
     """
 
     def __init__(self, maze_as_matrix, path, wall, cell_width=2):
