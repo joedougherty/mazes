@@ -6,7 +6,7 @@ class Cell:
     '''
     A representation of a cell in the maze.
 
-    :param coords: Coordinates
+    :param coords: Coordinates (row, col)
     :type  coords: tuple
 
     :param neighbors: List of neighboring cells as coords (see above)
@@ -50,6 +50,22 @@ def matrix2str(m):
 class Maze:
     '''
     Give me a matrix and I'll do some maze analysis. Sound good?
+
+    :param matrix: Matrix representing the path/wall cells that compose the maze
+    :type  matrix: list
+
+    :param path: Representation of path cells
+    :type  path: int
+
+    :param wall: Representation of wall cells
+    :type  wall: int
+
+    :param cell_width: How wide the cells are (function of max # of digits it takes to represent highest numbered node)
+    :type  cell_width: int
+
+    :param pretty_path: Representation of the path obtained by running `self.diagram_path`
+    :type  pretty_path: str
+
     '''
     def __init__(self, maze_as_matrix, path, wall, cell_width=2):
         self.matrix = maze_as_matrix
@@ -59,15 +75,13 @@ class Maze:
         self.pretty_path = matrix2str(self.diagram_path(self.cell_width))
 
     def count_path_nodes(self):
-        ''' Returns the total number of nodes that match `self.path` in self.matrix '''
+        ''' Returns the total number of nodes that match `self.path` in self.matrix. '''
         return sum([r.count(self.path) for r in self.matrix])
 
     def diagram_path(self, int_width=None):
         ''' 
         A graphic representation of the nodes. 
-        Each is assigned an autoincremented id when it is discovered.
-
-        >>> print(pretty_matrix(self.extract_path())     
+        Each node is assigned an autoincremented id upon discovery.
         '''
         if not int_width:
             int_width = self.cell_width
