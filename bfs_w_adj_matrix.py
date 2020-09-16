@@ -17,8 +17,6 @@ class Node:
     def __init__(self, num_id, parent=None):
         self.num_id = num_id
         self.parent = parent
-        # 0=A, 1=B, 2=C, ...
-        self.letter = ascii_uppercase[self.num_id]
 
     def __repr__(self):
         if self.parent:

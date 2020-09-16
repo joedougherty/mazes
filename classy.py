@@ -1,4 +1,9 @@
-from collections import OrderedDict
+from blessings import Terminal
+
+t = Terminal()
+
+
+from collections import OrderedDict, deque
 from itertools import count
 
 
@@ -24,7 +29,7 @@ class Cell:
     :param is_dead_end: Does this cell have exactly one neighbor?
     :type  is_dead_end: bool
     '''
-    def __init__(self, coords, neighbors=None):
+    def __init__(self, coords, neighbors=None, traversal_mode=False):
         self.coords = coords
         if neighbors:
             self.neighbors = neighbors
@@ -36,14 +41,25 @@ class Cell:
         self.is_intersection = len(self.neighbors) > 2
         self.is_dead_end = len(self.neighbors) == 1
 
+        # This doesn't come into play until the traversal stage
+        self.prev = None
+        self.traversal_mode = traversal_mode
+    
     def __repr__(self):
-        return f"""(Neighbors={self.neighbors}, Intersection={self.is_intersection}, Dead End={self.is_dead_end}"""
+        if self.traversal_mode:
+            if self.prev:
+                return f"""{self.prev} -> {self.coords}"""
+            else:
+                return f"""{self.coords}"""
+        else:
+            return f"""Neighbors={self.neighbors}, Intersection={self.is_intersection}, Dead End={self.is_dead_end}"""
 
 
 def matrix2str(m):
-    p = ""
+    p = ''
     for row in m:
-        p += " ".join(row) + "\n"
+        p += ' '.join([str(e) for e in row]) + '\n'
+
     return p
 
 
@@ -73,33 +89,44 @@ class Maze:
         self.wall = wall
         self.cell_width = cell_width
         self.pretty_path = matrix2str(self.diagram_path(self.cell_width))
+        self.adjlist = self.to_adjlist()
+
+    def visualize(self, highlight_path=None):
+        if not highlight_path:
+            print(self.pretty_path)
+        else:
+            m = self.diagram_path(self.cell_width, highlight_cells=highlight_path)
+            print(matrix2str(m))
 
     def count_path_nodes(self):
         ''' Returns the total number of nodes that match `self.path` in self.matrix. '''
         return sum([r.count(self.path) for r in self.matrix])
 
-    def diagram_path(self, int_width=None):
+    def diagram_path(self, int_width=None, highlight_cells=None):
         ''' 
         A graphic representation of the nodes. 
-        Each node is assigned an autoincremented id upon discovery.
         '''
+        if not highlight_cells:
+            highlight_cells = []
+
         if not int_width:
             int_width = self.cell_width
 
         autoid = count(start=0, step=1)
 
         path = []
-        for row in self.matrix:
+        for r_idx, row in enumerate(self.matrix):
             new_row = []
-            for col in row:
-                if col == self.path:
-                    v = str(next(autoid)).zfill(int_width)
+            for c_idx, col in enumerate(row):
+                row_rep, col_rep = str(r_idx).zfill(2), str(c_idx).zfill(2)
+
+                coords_rep = f'''({row_rep}, {col_rep})'''
+                if col == self.path and ((r_idx, c_idx) in highlight_cells):
+                    new_row.append(t.bold_red(coords_rep))
+                elif col == self.path and (r_idx, c_idx) not in highlight_cells:
+                    new_row.append(coords_rep)
                 else:
-                    #   int_width == 1, v = " "
-                    #   int_width == 2, v = "  "
-                    #   int_width == 3, v = "   ", etc.
-                    v = " "*int_width 
-                new_row.append(v)
+                    new_row.append(" "*8)
 
             path.append(new_row)
         return path
@@ -179,3 +206,54 @@ class Maze:
                     cells.update({coords : new_cell})
 
         return cells
+
+    def bfs(self, start_coords, goal_coords):
+        '''
+        Explores the Adjancency List `self.adjlist` for a path from `start_coords` to `goal_coords`.
+
+        If found, returns a reference to found Cell.
+        Otherwise, returns False.
+        '''
+        to_visit = deque()
+        visited = set()
+
+        root = self.adjlist[start_coords]
+        root.traversal_mode = True
+
+        to_visit.append(root)
+
+        while to_visit:
+            cell = to_visit.popleft()
+            visited.add(cell)
+
+            if cell.coords == goal_coords:
+                return cell
+
+            # Find adjacent edges that haven't been visited
+            for coords in cell.neighbors:
+                next_cell = self.adjlist[coords] 
+                if next_cell not in visited:
+                    next_cell.prev = cell
+                    next_cell.traversal_mode = True
+                    to_visit.append(next_cell)
+
+        return False
+
+    def shortest_path(self, start_coords, goal_coords, start_to_end=True):
+        cell_list = []
+
+        found = self.bfs(start_coords, goal_coords)
+        
+        if not found:
+            return "No path found!"
+
+        cell_list.append(found.coords)
+
+        while found.prev:
+            found = found.prev
+            cell_list.append(found.coords)
+
+        if start_to_end:
+            cell_list.reverse()
+
+        return cell_list
