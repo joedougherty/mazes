@@ -101,7 +101,7 @@ class Maze:
     def to_ascii(self, highlight_cells=None):
         if not highlight_cells:
             highlight_cells = []
-        
+
         new_rep = []
         for r_idx, row in enumerate(self.matrix):
             new_row = []
