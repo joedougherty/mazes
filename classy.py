@@ -88,15 +88,28 @@ class Maze:
         self.path = path
         self.wall = wall
         self.cell_width = cell_width
-        self.pretty_path = matrix2str(self.diagram_path(self.cell_width))
         self.adjlist = self.to_adjlist()
 
-    def visualize(self, highlight_path=None):
+    def show_paths(self, highlight_path=None):
         if not highlight_path:
-            print(self.pretty_path)
+            print(matrix2str(self.diagram_path(self.cell_width)))
         else:
             m = self.diagram_path(self.cell_width, highlight_cells=highlight_path)
             print(matrix2str(m))
+
+    def to_ascii(self):
+        new_rep = []
+        for row in self.matrix:
+            new_row = []
+            for col in row:
+                if col == self.wall:
+                    new_row.append('#')
+                elif col == self.path:
+                    new_row.append(' ')
+                else:
+                    raise ValueError('Matrices must be composed of only {self.path} and {self.wall}!') 
+            new_rep.append(new_row)
+        print(matrix2str(new_rep))
 
     def count_path_nodes(self):
         ''' Returns the total number of nodes that match `self.path` in self.matrix. '''
