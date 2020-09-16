@@ -91,7 +91,7 @@ class Maze:
         self.cell_width = cell_width
         self.adjlist = self.to_adjlist()
 
-    def show_paths(self, highlight_path=None):
+    def show_vertices(self, highlight_path=None):
         if not highlight_path:
             print(matrix2str(self.diagram_path(self.cell_width)))
         else:
