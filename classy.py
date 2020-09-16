@@ -1,10 +1,11 @@
 from blessings import Terminal
 
-t = Terminal()
-
 
 from collections import OrderedDict, deque
 from itertools import count
+
+
+t = Terminal()
 
 
 class Cell:
@@ -59,7 +60,6 @@ def matrix2str(m):
     p = ''
     for row in m:
         p += ' '.join([str(e) for e in row]) + '\n'
-
     return p
 
 
@@ -211,7 +211,7 @@ class Maze:
         '''
         Explores the Adjancency List `self.adjlist` for a path from `start_coords` to `goal_coords`.
 
-        If found, returns a reference to found Cell.
+        If found, returns a reference to found Cell at `goal_coords`.
         Otherwise, returns False.
         '''
         to_visit = deque()

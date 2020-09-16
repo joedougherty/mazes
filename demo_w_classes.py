@@ -24,4 +24,3 @@ maze = [
 PATH, WALL = 0, 1
 
 demo = Maze(maze, path=PATH, wall=WALL)
-
