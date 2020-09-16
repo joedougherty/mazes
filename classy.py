@@ -48,11 +48,10 @@ class Cell:
         self.traversal_mode = traversal_mode
 
     def __repr__(self):
-        if self.traversal_mode:
-            if self.prev:
-                return f"""{self.prev} -> {self.coords}"""
-            else:
-                return f"""{self.coords}"""
+        if self.traversal_mode and self.prev:
+            return f"""{self.prev} -> {self.coords}"""
+        elif self.traversal_mode and not self.prev:
+            return f"""{self.coords}"""
         else:
             return f"""Neighbors={self.neighbors}, Intersection={self.is_intersection}, Dead End={self.is_dead_end}"""
 
