@@ -4,8 +4,6 @@ from itertools import count
 PATH = 0 
 WALL = 1
 
-autoid = count(start=0, step=1)
-
 
 class Cell:
     def __init__(self, coords, neighbors=None):
@@ -48,6 +46,8 @@ def find_neighbors(coords, matrix):
     return [v for v in visited if v]
 
 def maze2cells(matrix):
+    autoid = count(start=0, step=1)
+
     cells = list()
 
     for r_idx, row in enumerate(matrix):
