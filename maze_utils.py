@@ -9,7 +9,10 @@ class Cell:
     def __init__(self, coords, neighbors=None):
         self.coords = coords
         self.id = next(autoid)
-        self.neighbors = neighbors
+        if self.neighbors:
+            self.neighbors = neighbors
+        else:
+            self.neighbors = []
         self.is_intersection = len(self.neighbors) > 2
         self.is_dead_end = len(self.neighbors) == 1
 
