@@ -2,29 +2,13 @@ from itertools import count
 from collections import OrderedDict
 
 
+
+from classy import Cell
+
+
+
 PATH = 0
 WALL = 1
-
-
-class Cell:
-    def __init__(self, coords, neighbors=None):
-        self.coords = coords
-        if neighbors:
-            self.neighbors = neighbors
-        else:
-            self.neighbors = []
-
-        # Derived Attributes
-        self.row, self.col = self.coords
-        self.is_intersection = len(self.neighbors) > 2
-        self.is_dead_end = len(self.neighbors) == 1
-
-    def __str__(self):
-        #return f'''({self.row}, {self.col})'''
-        return f"""Neighbors: {self.neighbors}, Intersection: {self.is_intersection}, Dead End: {self.is_dead_end}"""
-
-    def __repr__(self):
-        return f"""Neighbors: {self.neighbors}, Intersection: {self.is_intersection}, Dead End: {self.is_dead_end}"""
 
 
 def discover_cell(coords, matrix):
@@ -52,9 +36,6 @@ def find_neighbors(coords, matrix):
 
 
 def maze2adjlist(matrix):
-    '''
-    Given 
-    '''
     cells = OrderedDict()
 
     for row_idx, row in enumerate(matrix):
@@ -68,5 +49,3 @@ def maze2adjlist(matrix):
                 cells.update({coords : new_cell})
 
     return cells
-
-
