@@ -98,13 +98,18 @@ class Maze:
             m = self.diagram_path(self.cell_width, highlight_cells=highlight_path)
             print(matrix2str(m))
 
-    def to_ascii(self):
+    def to_ascii(self, highlight_cells=None):
+        if not highlight_cells:
+            highlight_cells = []
+        
         new_rep = []
-        for row in self.matrix:
+        for r_idx, row in enumerate(self.matrix):
             new_row = []
-            for col in row:
+            for c_idx, col in enumerate(row):
                 if col == self.wall:
                     new_row.append("#")
+                elif col == self.path and (r_idx, c_idx) in highlight_cells:
+                    new_row.append(t.red("*"))
                 elif col == self.path:
                     new_row.append(" ")
                 else:
