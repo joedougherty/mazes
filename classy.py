@@ -3,27 +3,27 @@ from itertools import count
 
 
 class Cell:
-	'''
-	A representation of a cell in the maze.
+    '''
+    A representation of a cell in the maze.
 
-	:param coords: Coordinates
-	:type  coords: tuple
+    :param coords: Coordinates
+    :type  coords: tuple
 
-	:param neighbors: List of neighboring cells as coords (see above)
-	:type  neighbors: list 
+    :param neighbors: List of neighboring cells as coords (see above)
+    :type  neighbors: list 
 
-	:param row: Row ID
-	:type  row: int
+    :param row: Row ID
+    :type  row: int
 
-	:param col: Col ID
-	:type  col: int
+    :param col: Col ID
+    :type  col: int
 
-	:param is_intersection: Does this cell have more than 2 neighors?
-	:type  is_intersection: bool
+    :param is_intersection: Does this cell have more than 2 neighors?
+    :type  is_intersection: bool
 
-	:param is_dead_end: Does this cell have exactly one neighbor?
-	:type  is_dead_end: bool
-	'''
+    :param is_dead_end: Does this cell have exactly one neighbor?
+    :type  is_dead_end: bool
+    '''
     def __init__(self, coords, neighbors=None):
         self.coords = coords
         if neighbors:
@@ -98,7 +98,6 @@ class Maze:
             else:
                 # it's out of bounds or not a path cell
                 return False
-            
         '''
         width, height = len(self.matrix[0]), len(self.matrix)
         row, col = coords
@@ -133,9 +132,8 @@ class Maze:
         Returns adjacenct list as a dict where:
             key -> coords,
             val -> Cell objects (coords, found neighbors, etc.)
-
         
-        # Example
+        # EXAMPLE #
         matrix = [
            [0, 1],
            [0, 1],
@@ -144,14 +142,13 @@ class Maze:
         simple = Maze(matrix)
         simple.to_adlist()
 
-		Results in:
-
-		OrderedDict([
-			((0, 0), (Neighbors=[(1, 0)], Intersection=False, Dead End=True),
-			((1, 0), (Neighbors=[(0, 0)], Intersection=False, Dead End=True)
-		])
-	
-		Either way you start, the only finish is to go the other.
+        # RESULTS #
+        OrderedDict([
+            ((0, 0), (Neighbors=[(1, 0)], Intersection=False, Dead End=True),
+            ((1, 0), (Neighbors=[(0, 0)], Intersection=False, Dead End=True)
+        ])
+    
+        Either way you start, the only finish is to go the other.
         '''
         cells = OrderedDict()
 
