@@ -55,8 +55,6 @@ def maze2cells(matrix):
             current = (r_idx, c_idx)
 
             if visit_cell(current, matrix):
-                neighbors = find_neighbors(current, matrix)
-
                 cells.append(
                     Cell(
                         current, 
