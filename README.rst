@@ -70,11 +70,11 @@ Representation of a graph as an Adjacency List
 .. code-block:: python
     
     adj_list = [
-        [1,2],  # A
-        [3,4],  # B
-        [],     # C
-        [],     # D
-        [],     # E
+        [1,2],   # A :: Neighbors: [B,C]
+        [3,4],   # B :: Neighbors: [D,E]
+        [0],     # C :: Neighbors: [A]
+        [1],     # D :: Neighbors: [B]
+        [1],     # E :: Neighbors: [B]
     ]
 
 
