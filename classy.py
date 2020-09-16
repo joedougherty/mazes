@@ -148,7 +148,7 @@ class Maze:
             ((1, 0), (Neighbors=[(0, 0)], Intersection=False, Dead End=True)
         ])
     
-        Either way you start, the only finish is to go the other.
+        In this example, either way you start the only way to finish is to go to the other.
         '''
         cells = OrderedDict()
 
