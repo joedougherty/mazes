@@ -5,7 +5,7 @@ from maze_utils import Cell, visit_cell, find_neighbors, maze2cells, PATH, WALL
 
 
 
-def printable_map(m):  
+def pretty(m):  
     p = ''
     for row in m:
         p += ' '.join(row) + '\n'
@@ -47,3 +47,4 @@ maze = [
 
 
 adj_list = maze2cells(maze)
+ascii_rep = pretty(extract_path(maze))
