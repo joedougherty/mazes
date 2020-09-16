@@ -18,12 +18,12 @@ class Node:
         self.num_id = num_id
         self.parent = parent
         # 0=A, 1=B, 2=C, ...
-        self.letter = ascii_uppercase[self.num_id] 
+        self.letter = ascii_uppercase[self.num_id]
 
     def __repr__(self):
         if self.parent:
-            return f'''{self.parent} -> {self.letter}'''
-        return f'''{self.letter}'''
+            return f"""{self.parent} -> {self.letter}"""
+        return f"""{self.letter}"""
 
 
 def bfs(adj_matrix, start_node_id, goal_node_id):
@@ -37,7 +37,7 @@ def bfs(adj_matrix, start_node_id, goal_node_id):
         visited.add(node)
 
         if node.num_id == goal_node_id:
-            return node 
+            return node
 
         # Find adjacent edges that haven't been visited
         for idx, val in enumerate(adj_matrix[node.num_id]):

@@ -4,17 +4,16 @@ from itertools import count
 from maze_utils import Cell, visit_cell, find_neighbors, maze2cells, PATH, WALL
 
 
-
-def pretty(m):  
-    p = ''
+def pretty(m):
+    p = ""
     for row in m:
-        p += ' '.join(row) + '\n'
+        p += " ".join(row) + "\n"
     return p
 
 
 def extract_path(maze):
     autoid = count(start=0, step=1)
-    
+
     path = []
     for row in maze:
         new_row = []
@@ -22,12 +21,12 @@ def extract_path(maze):
             if col == PATH:
                 v = str(next(autoid)).zfill(2)
             else:
-                v = ('  ')
+                v = "  "
             new_row.append(v)
 
         path.append(new_row)
     return path
-                
+
 
 # Source: https://py.checkio.org/en/mission/open-labyrinth/share/574bd1ded68c9705c5d6f07c6206be12/
 maze = [
