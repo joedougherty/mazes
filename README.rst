@@ -58,7 +58,9 @@ An *N* x *N* matrix where each cell contains either ``0`` or ``1``.
 + ``0``: There is no connection between the two nodes given by ``row``, ``col``.
 + ``1``: There is a connection between the two nodes given by ``row``, ``col``.
 
-**Example**:
++++++++++++++++++++++++++
+Adjacency Matrix Example
++++++++++++++++++++++++++
 
 As in the tree above, we can see there's a connection between ``A`` and ``C``.
 
