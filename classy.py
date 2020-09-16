@@ -2,7 +2,6 @@ from blessings import Terminal
 
 
 from collections import OrderedDict, deque
-from itertools import count
 
 
 t = Terminal()
@@ -131,8 +130,6 @@ class Maze:
 
         if not int_width:
             int_width = self.cell_width
-
-        autoid = count(start=0, step=1)
 
         path = []
         for r_idx, row in enumerate(self.matrix):
