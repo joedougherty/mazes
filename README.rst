@@ -108,7 +108,9 @@ Adjacency Matrix Example
     ]
 
 
-All three of these representations describe the same object.
+.. ATTENTION::
+
+    Note that this representation potentially makes it less efficient to check if two nodes are conencted.
 
 ---------
 Resources
@@ -122,3 +124,6 @@ https://www.khanacademy.org/computing/computer-science/algorithms/graph-represen
 
 
 https://py.checkio.org/en/mission/open-labyrinth/share/574bd1ded68c9705c5d6f07c6206be12/
+
+
+Skiena, S. (2008) *The Algorithm Design Manual* IBSN: 9781848000698
