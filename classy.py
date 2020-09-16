@@ -114,6 +114,8 @@ class Maze:
         Given coords (row, col):
             check the neighbors to the N, S, E, W
             if they contain coords, return them
+
+        If no neighbors found, return []
         '''
         row, col = coords
 
