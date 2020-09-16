@@ -88,6 +88,15 @@ The cells ``adj_matrix[0][2]`` and ``adj_matrix[2][0]`` both contain ``1`` -- th
 Representation of a graph as an Adjacency List
 ----------------------------------------------
 
+A list of length *N* where *N* = the number of nodes in the graph.
+
+Each member of the list is a list containing references to its neighbors.
+
++++++++++++++++++++++++++
+Adjacency Matrix Example
++++++++++++++++++++++++++
+
+
 .. code-block:: python
     
     adj_list = [
@@ -99,10 +108,7 @@ Representation of a graph as an Adjacency List
     ]
 
 
-
-
 All three of these representations describe the same object.
-
 
 ---------
 Resources
