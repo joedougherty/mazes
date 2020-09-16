@@ -52,7 +52,7 @@ Representation of a graph as a Tree
 Representation of a graph as an Adjacency Matrix
 ------------------------------------------------
 
-An *N* x *N* matrix where each cell contains either ``0`` or ``1``. Here *N* = the number of nodes in the graph.
+An *N* x *N* matrix where each cell contains either ``0`` or ``1`` where *N* = the number of nodes in the graph.
 
 
 + ``0``: There is no connection between the two nodes given by ``row``, ``col``.
