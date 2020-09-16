@@ -78,9 +78,10 @@ To check the Adjancency Matrix, we look in one of the two cells that represent t
     ]
 
 
-The cells ``adj_matrix[0][2]`` and ``adj_matrix[2][0]`` both contain ``1`` -- the cells are connected.
+The cells ``adj_matrix[0][2]`` and ``adj_matrix[2][0]`` both contain ``1`` -- the cells are connected!
 
 .. ATTENTION::
+
     Note that this representation repeats information. Each (possible) node connection is specified twice.
 
 
