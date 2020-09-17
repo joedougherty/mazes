@@ -1,5 +1,4 @@
-from classymaze import Maze
-
+from functionalish import matrix2adjlist, bfs
 from mazeutils import ascii_maze2matrix, matrix2str
 
 # Source:
@@ -21,4 +20,5 @@ matrix = [
 
 PATH, WALL = 0, 1
 
-demo = Maze(matrix, path=PATH, wall=WALL)
+adjlist = matrix2adjlist(matrix)
+path = bfs(adjlist, (1,1), (8,8))

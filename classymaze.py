@@ -1,30 +1,11 @@
 from blessings import Terminal
 
-
 from collections import OrderedDict, deque
+
+from mazeutils import ascii_maze2matrix, matrix2str
 
 
 t = Terminal()
-
-
-def ascii_maze2matrix(ascii_maze, path, wall):
-    matrix = []
-    for row in ascii_maze.split('\n'):
-        new_row = []
-        for col in row:
-            if col == path:
-                new_row.append(0)
-            elif col == wall:
-                new_row.append(1)
-        matrix.append(new_row)
-    return matrix
-
-
-def matrix2str(m):
-    p = ""
-    for row in m:
-        p += " ".join([str(e) for e in row]) + "\n"
-    return p
 
 
 class Cell:
@@ -52,7 +33,6 @@ class Cell:
     :param prev: Reference to previous Cell or None
     :param type: Cell or None
     """
-
     def __init__(self, coords, neighbors=None, traversal_mode=False):
         self.coords = coords
         if neighbors:
@@ -93,11 +73,7 @@ class Maze:
 
     :param cell_width: How wide the cells are (function of max # of digits it takes to represent highest numbered node)
     :type  cell_width: int
-
-    :param pretty_path: Representation of the path obtained by running `self.diagram_path`
-    :type  pretty_path: str
     """
-
     def __init__(self, maze_as_matrix, path, wall, cell_width=2):
         self.matrix = maze_as_matrix
         self.path = path
@@ -215,8 +191,8 @@ class Maze:
            [0, 1],
         ]
 
-        simple = Maze(matrix)
-        simple.to_adlist()
+        simple = Maze(matrix, 0, 1)
+        simple.to_adjlist()
 
         # RESULTS #
         OrderedDict([
@@ -270,7 +246,7 @@ class Maze:
         return False
 
     def shortest_path(self, start_coords, goal_coords, root_to_leaf=True):
-        cell_list = []
+        path = []
 
         found = self.bfs(start_coords, goal_coords)
 
@@ -278,13 +254,13 @@ class Maze:
             print("No path found!")
             return False
 
-        cell_list.append(found.coords)
+        path.append(found.coords)
 
         while found.prev:
             found = found.prev
-            cell_list.append(found.coords)
+            path.append(found.coords)
 
         if root_to_leaf:
-            cell_list.reverse()
+            path.reverse()
 
-        return cell_list
+        return path

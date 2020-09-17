@@ -3,6 +3,8 @@ from collections import OrderedDict
 
 
 from classymaze import Cell
+from mazeutils import ascii_maze2matrix, matrix2str
+
 
 
 PATH = 0
@@ -69,3 +71,24 @@ def bfs(adjlist, start_coords, goal_coords):
                 next_cell.traversal_mode = True
                 to_visit.append(next_cell)
     return False
+
+
+def shortest_path(adjlist, start_coords, goal_coords, root_to_leaf=True):
+    path = []
+
+    found = bfs(adjlist, start_coords, goal_coords)
+
+    if not found:
+        print("No path found!")
+        return False
+
+    path.append(found.coords)
+
+    while found.prev:
+        found = found.prev
+        path.append(found.coords)
+
+    if root_to_leaf:
+        path.reverse()
+
+    return path
