@@ -65,7 +65,7 @@ class Cell:
         self.is_intersection = len(self.neighbors) > 2
         self.is_dead_end = len(self.neighbors) == 1
 
-        # This doesn't come into play until the traversal stage
+        # These don't come into play until the traversal stage
         self.prev = None
         self.traversal_mode = traversal_mode
 
@@ -226,16 +226,16 @@ class Maze:
 
         In this example, either way you start the only way to finish is to go to the other.
         """
-        cells = OrderedDict()
+        adjlist = OrderedDict()
 
         for row_idx, row in enumerate(self.matrix):
             for col_idx, c in enumerate(row):
                 coords = (row_idx, col_idx)
                 if self.discover_cell(coords):
                     new_cell = Cell(coords, self.find_neighbors(coords))
-                    cells.update({coords: new_cell})
+                    adjlist.update({coords: new_cell})
 
-        return cells
+        return adjlist
 
     def bfs(self, start_coords, goal_coords):
         """

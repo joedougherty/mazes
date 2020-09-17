@@ -1,7 +1,7 @@
 from collections import deque
 
 
-from classy import Maze, matrix2str
+from classymaze import Maze, matrix2str
 
 
 # Source:
