@@ -275,7 +275,8 @@ class Maze:
         found = self.bfs(start_coords, goal_coords)
 
         if not found:
-            return "No path found!"
+            print("No path found!")
+            return False
 
         cell_list.append(found.coords)
 
