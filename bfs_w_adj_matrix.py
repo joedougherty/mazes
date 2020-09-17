@@ -1,5 +1,4 @@
 from collections import deque
-from string import ascii_uppercase
 
 
 matrix = [
@@ -20,8 +19,8 @@ class Node:
 
     def __repr__(self):
         if self.parent:
-            return f"""{self.parent} -> {self.letter}"""
-        return f"""{self.letter}"""
+            return f"""{self.parent} -> {self.num_id}"""
+        return f"""{self.num_id}"""
 
 
 def bfs(adj_matrix, start_node_id, goal_node_id):
