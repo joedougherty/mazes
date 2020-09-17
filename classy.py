@@ -7,6 +7,26 @@ from collections import OrderedDict, deque
 t = Terminal()
 
 
+def ascii_maze2matrix(ascii_maze, path, wall):
+    matrix = []
+    for row in ascii_maze.split('\n'):
+        new_row = []
+        for col in row:
+            if col == path:
+                new_row.append(0)
+            elif col == wall:
+                new_row.append(1)
+        matrix.append(new_row)
+    return matrix
+
+
+def matrix2str(m):
+    p = ""
+    for row in m:
+        p += " ".join([str(e) for e in row]) + "\n"
+    return p
+
+
 class Cell:
     """
     A representation of a cell in the maze.
@@ -28,6 +48,9 @@ class Cell:
 
     :param is_dead_end: Does this cell have exactly one neighbor?
     :type  is_dead_end: bool
+
+    :param prev: Reference to previous Cell or None
+    :param type: Cell or None
     """
 
     def __init__(self, coords, neighbors=None, traversal_mode=False):
@@ -53,13 +76,6 @@ class Cell:
             return f"""{self.coords}"""
         else:
             return f"""Neighbors={self.neighbors}, Intersection={self.is_intersection}, Dead End={self.is_dead_end}"""
-
-
-def matrix2str(m):
-    p = ""
-    for row in m:
-        p += " ".join([str(e) for e in row]) + "\n"
-    return p
 
 
 class Maze:
@@ -96,7 +112,7 @@ class Maze:
             m = self.diagram_path(self.cell_width, highlight_cells=highlight_path)
             print(matrix2str(m))
 
-    def to_ascii(self, highlight_cells=None):
+    def as_ascii(self, highlight_cells=None):
         if not highlight_cells:
             highlight_cells = []
 
