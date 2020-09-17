@@ -253,7 +253,7 @@ class Maze:
 
         return False
 
-    def shortest_path(self, start_coords, goal_coords, start_to_end=True):
+    def shortest_path(self, start_coords, goal_coords, root_to_leaf=True):
         cell_list = []
 
         found = self.bfs(start_coords, goal_coords)
@@ -267,7 +267,7 @@ class Maze:
             found = found.prev
             cell_list.append(found.coords)
 
-        if start_to_end:
+        if root_to_leaf:
             cell_list.reverse()
 
         return cell_list
