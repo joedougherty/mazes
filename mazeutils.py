@@ -1,14 +1,14 @@
 '''
 In general:
-    str2matrix(matrix2str(X)) == matrix2str(str2matrix(X))
+    str2nested_list(nested_list2str(X)) == nested_list2str(str2nested_list(X))
 '''
 
-def str2matrix(maze_str):
-    return [list(e) for e in maze_str.split('\n')]
+def str2nested_list(s, delim='\n'):
+    return [list(e) for e in maze_str.split(delim)]
 
 
-def matrix2str(m):
+def nested_list2str(l, delim='\n'):
     p = ""
     for row in m:
-        p += "".join([str(e) for e in row]) + "\n"
+        p += "".join([str(e) for e in row]) + delim
     return p
