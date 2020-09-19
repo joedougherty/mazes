@@ -257,7 +257,7 @@
 </div>
 <div class="section" id="a-brief-diversion-printing-a-linked-list-with-recursive-repr">
 <h2>A Brief Diversion: printing a linked list with recursive <code class="docutils literal notranslate"><span class="pre">__repr__</span></code><a class="headerlink" href="#a-brief-diversion-printing-a-linked-list-with-recursive-repr" title="Permalink to this headline">¶</a></h2>
-<p>There’s a way to print the path by only referencing the final room in the path.</p>
+<p>Here is a simplified example to demonstrate the principle.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -279,6 +279,17 @@
                <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="si">}</span><span class="s1"> &lt;- </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
            <span class="k">else</span><span class="p">:</span>
                <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>   <span class="n">zero</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+   <span class="n">one</span>  <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">zero</span><span class="p">)</span>
+   <span class="n">two</span>  <span class="o">=</span> <span class="n">node</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">one</span><span class="p">)</span>
+
+   <span class="nb">print</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="c1"># &#39;&#39;&#39;0 &lt;- 1 &lt;- 2&#39;&#39;&#39;</span>
 </pre></div>
 </td></tr></table></div>
 </div>

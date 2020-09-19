@@ -99,7 +99,7 @@ Prior to adding new room to the ``to_visit`` queue, we note down that ``Room`` c
 A Brief Diversion: printing a linked list with recursive ``__repr__`` 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-There's a way to print the path by only referencing the final room in the path. 
+Here is a simplified example to demonstrate the principle. 
 
 .. code-block:: python
  :linenos:
@@ -117,6 +117,15 @@ There's a way to print the path by only referencing the final room in the path.
                 return f'''{self.val}'''
 
 
+
+.. code-block:: python
+ :linenos:
+
+    zero = Node(0, parent=None)
+    one  = Node(1, parent=zero)
+    two  = node(2, parent=one)
+
+    print(two) # '''0 <- 1 <- 2'''
 
 
 ---------
