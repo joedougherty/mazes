@@ -47,7 +47,8 @@ That was easy enough!
 
 ``tiny_nested_list``'s value is:
 
-.. code-blocK:: text
+.. code-block:: text
+
     [['#', '#', '#', '#', '#', '#'],
      ['#', ' ', ' ', ' ', ' ', '#'],
      ['#', ' ', '#', ' ', '#', '#'],

@@ -2,7 +2,7 @@ from blessings import Terminal
 
 from collections import OrderedDict, deque
 
-from mazeutils import str2matrix, matrix2str
+from mazeutils import str2nested_list, nested_list2str
 
 
 t = Terminal()
@@ -76,7 +76,7 @@ class Maze:
     """
     def __init__(self, maze_as_matrix, path, wall, room_width=2):
         if isinstance(maze_as_matrix, str):
-            self.maze_as_matrix = str2matrix(maze_as_matrix)
+            self.maze_as_matrix = str2nested_list(maze_as_matrix)
         elif isistance(maze_as_matrix, list):
             self.maze_as_matrix = maze_as_matrix
         else:
@@ -89,10 +89,10 @@ class Maze:
 
     def show_vertices(self, highlight_path=None):
         if not highlight_path:
-            print(matrix2str(self.diagram_path(self.room_width)))
+            print(nested_list2str(self.diagram_path(self.room_width)))
         else:
             m = self.diagram_path(self.room_width, highlight_rooms=highlight_path)
-            print(matrix2str(m))
+            print(nested_list2str(m))
 
     def as_ascii(self, highlight_rooms=None):
         if not highlight_rooms:

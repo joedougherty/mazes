@@ -1,5 +1,5 @@
 ---------------------------------------------------------
-From ASCII Maze to Adjacency List: A Series of Transforms
+From an ASCII Maze to an Adjacency List
 ---------------------------------------------------------
 
 
@@ -20,7 +20,18 @@ Step 1: Use an intermediate form: Maze as Nested List
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-Let's convert the ASCII maze into a list of lists. Much nicer to work with.
+.. code-block:: python
+    
+    tiny = '''
+######
+#    #
+# # ##
+######
+'''.strip()
+
+
+
+Let's convert this ASCII maze, ``tiny``  into a list of lists. Much nicer to work with.
 
 
 .. code-block:: python
@@ -29,7 +40,19 @@ Let's convert the ASCII maze into a list of lists. Much nicer to work with.
         return [list(e) for e in s.split('\n')]
 
 
+    tiny_nested_list = str2nested_list(tiny)
+    
+
 That was easy enough!
+
+``tiny_nested_list``'s value is:
+
+.. code-block:: text
+
+    [['#', '#', '#', '#', '#', '#'],
+     ['#', ' ', ' ', ' ', ' ', '#'],
+     ['#', ' ', '#', ' ', '#', '#'],
+     ['#', '#', '#', '#', '#', '#']]
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++

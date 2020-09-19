@@ -6,7 +6,7 @@
 Welcome to The Minotaur's Mini-Tour!
 ====================================
 
-*Looking at methods to solve mazes without all the bull.*
+*Looking at methods to solve mazes ... without all the bull.*
 
 .. toctree::
    :maxdepth: 2

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>From ASCII Maze to Adjacency List: A Series of Transforms &mdash; The Minoatur&#39;s Mini-Tour 0.1 documentation</title>
+  <title>From an ASCII Maze to an Adjacency List &mdash; The Minoatur&#39;s Mini-Tour 0.1 documentation</title>
   
 
   
@@ -82,18 +82,18 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation (Optional)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="begin.html">Defining Our Terms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="begin.html#lil-labyrinth-methods-of-maze-representation">‘Lil Labyrinth: Methods of Maze Representation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">From ASCII Maze to Adjacency List: A Series of Transforms</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">From an ASCII Maze to an Adjacency List</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#step-1-use-an-intermediate-form-maze-as-nested-list">Step 1: Use an intermediate form: Maze as Nested List</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#step-2-convert-maze-as-nested-list-to-an-adjacency-list">Step 2: Convert Maze as Nested List to an Adjacency List</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="end.html">A Review of BFS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html#looking-at-an-implementation">Looking at an Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="end.html#pathfinding">Pathfinding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html#resources">Resources</a></li>
 </ul>
 
@@ -141,7 +141,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>From ASCII Maze to Adjacency List: A Series of Transforms</li>
+      <li>From an ASCII Maze to an Adjacency List</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -160,8 +160,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="from-ascii-maze-to-adjacency-list-a-series-of-transforms">
-<h1>From ASCII Maze to Adjacency List: A Series of Transforms<a class="headerlink" href="#from-ascii-maze-to-adjacency-list-a-series-of-transforms" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="from-an-ascii-maze-to-an-adjacency-list">
+<h1>From an ASCII Maze to an Adjacency List<a class="headerlink" href="#from-an-ascii-maze-to-an-adjacency-list" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>######
 #    #
 # # ##
@@ -171,12 +171,25 @@
 <p>How can transform this string into an Adjacency List?</p>
 <div class="section" id="step-1-use-an-intermediate-form-maze-as-nested-list">
 <h2>Step 1: Use an intermediate form: Maze as Nested List<a class="headerlink" href="#step-1-use-an-intermediate-form-maze-as-nested-list" title="Permalink to this headline">¶</a></h2>
-<p>Let’s convert the ASCII maze into a list of lists. Much nicer to work with.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tiny</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<p>Let’s convert this ASCII maze, <code class="docutils literal notranslate"><span class="pre">tiny</span></code>  into a list of lists. Much nicer to work with.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">str2nested_list</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">delim</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span>
+
+
+<span class="n">tiny_nested_list</span> <span class="o">=</span> <span class="n">str2nested_list</span><span class="p">(</span><span class="n">tiny</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>That was easy enough!</p>
+<p><code class="docutils literal notranslate"><span class="pre">tiny_nested_list</span></code>’s value is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[[&#39;#&#39;, &#39;#&#39;, &#39;#&#39;, &#39;#&#39;, &#39;#&#39;, &#39;#&#39;],
+ [&#39;#&#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39;#&#39;],
+ [&#39;#&#39;, &#39; &#39;, &#39;#&#39;, &#39; &#39;, &#39;#&#39;, &#39;#&#39;],
+ [&#39;#&#39;, &#39;#&#39;, &#39;#&#39;, &#39;#&#39;, &#39;#&#39;, &#39;#&#39;]]
+</pre></div>
+</div>
 </div>
 <div class="section" id="step-2-convert-maze-as-nested-list-to-an-adjacency-list">
 <h2>Step 2: Convert Maze as Nested List to an Adjacency List<a class="headerlink" href="#step-2-convert-maze-as-nested-list-to-an-adjacency-list" title="Permalink to this headline">¶</a></h2>
