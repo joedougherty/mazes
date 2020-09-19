@@ -2,7 +2,7 @@
                                                             |
                                                             |
 procedure BFS(G, root) is                                   |  def bfs(adjlist, start_coords, goal_coords):
-	let Q be a queue                                        |      to_visit = deque(), visited = set()
+	let Q be a queue                                        |      to_visit, visited = deque(), set()
 	label root as discovered                                |      root = adjlist[start_coords]
     Q.enqueue(root)                                         |      to_visit.append(root)
 	                                                        |      
