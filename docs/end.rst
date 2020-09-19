@@ -128,6 +128,41 @@ Here is a simplified example to demonstrate the principle.
     print(two) # '''0 <- 1 <- 2'''
 
 
+-------------------
+Visualization
+-------------------
+
+++++++++++++++++
+``.as_ascii()``
+++++++++++++++++
+
+
+.. code-block:: text
+
+    >>> tiny.as_ascii()
+
+    ######
+    #    #
+    # # ##
+    ######
+
+
+
+
++++++++++++++++++++++
+``.show_vertices()``
++++++++++++++++++++++
+
+.. code-block:: text
+
+    >>> tiny.show_vertices()
+
+    (01, 01)(01, 02)(01, 03)(01, 04)
+    (02, 01)        (02, 03)
+
+
+Shows the relationships between the rooms, using coords as an identifier.
+
 ---------
 Resources
 ---------
