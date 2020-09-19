@@ -1,18 +1,14 @@
-def ascii_maze2input_matrix(ascii_maze, path, wall):
-    matrix = []
-    for row in ascii_maze.split('\n'):
-        new_row = []
-        for col in row:
-            if col == path:
-                new_row.append(0)
-            elif col == wall:
-                new_row.append(1)
-        matrix.append(new_row)
-    return matrix
+'''
+In general:
+    str2matrix(matrix2str(X)) == matrix2str(str2matrix(X))
+'''
+
+def str2matrix(maze_str):
+    return [list(e) for e in maze_str.split('\n')]
 
 
 def matrix2str(m):
     p = ""
     for row in m:
-        p += " ".join([str(e) for e in row]) + "\n"
+        p += "".join([str(e) for e in row]) + "\n"
     return p

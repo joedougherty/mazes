@@ -1,24 +1,15 @@
 from classymaze import Maze
 
-from mazeutils import ascii_maze2matrix, matrix2str
+from mazeutils import str2matrix, matrix2str
 
-# Source:
-#   https://py.checkio.org/en/mission/open-labyrinth/share/574bd1ded68c9705c5d6f07c6206be12/
-matrix = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
-    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
-    [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1],
-    [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
-    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-]
 
-PATH, WALL = 0, 1
+PATH, WALL = ' ', '#'
 
-demo = Maze(matrix, path=PATH, wall=WALL)
+tiny = '''
+######
+#    #
+# # ##
+######
+'''.strip()
+
+demo = Maze(tiny, path=PATH, wall=WALL)

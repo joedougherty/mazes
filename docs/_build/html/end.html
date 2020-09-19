@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="middle.html" /> 
+    <link rel="prev" title="From ASCII Maze to Adjacent List: A Series of Transforms" href="middle.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,7 +86,9 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation (Optional)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="begin.html">Defining Our Terms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="begin.html#lil-labyrinth-methods-of-maze-representation">‘Lil Labyrinth: Methods of Maze Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="middle.html">From ASCII Maze to Adjacent List: A Series of Transforms</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">A Review of BFS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#looking-at-an-implementation">Looking at an Implementation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#resources">Resources</a></li>
 </ul>
 
@@ -176,6 +178,37 @@
 <p><strong>B</strong>. discovers neighboring nodes (lines 9-13)</p>
 <p><strong>C</strong>. proceeds by visiting them and continuing this process until there are no new nodes left to discover and visit (line 5)</p>
 </div>
+<div class="section" id="looking-at-an-implementation">
+<h1>Looking at an Implementation<a class="headerlink" href="#looking-at-an-implementation" title="Permalink to this headline">¶</a></h1>
+<p>Here’s some sample code to compare it to the pseudocode above!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Source: $ROOT/functionalish.py</span>
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">adjlist</span><span class="p">,</span> <span class="n">start_coords</span><span class="p">,</span> <span class="n">goal_coords</span><span class="p">):</span>
+    <span class="n">to_visit</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="n">root</span> <span class="o">=</span> <span class="n">adjlist</span><span class="p">[</span><span class="n">start_coords</span><span class="p">]</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">traversal_mode</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">to_visit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">to_visit</span><span class="p">:</span>
+        <span class="n">room</span> <span class="o">=</span> <span class="n">to_visit</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">room</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">room</span><span class="o">.</span><span class="n">coords</span> <span class="o">==</span> <span class="n">goal_coords</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">room</span>
+
+        <span class="c1"># Find adjacent edges that haven&#39;t been visited</span>
+        <span class="k">for</span> <span class="n">coords</span> <span class="ow">in</span> <span class="n">room</span><span class="o">.</span><span class="n">neighbors</span><span class="p">:</span>
+            <span class="n">next_room</span> <span class="o">=</span> <span class="n">adjlist</span><span class="p">[</span><span class="n">coords</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">next_room</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                <span class="n">next_room</span><span class="o">.</span><span class="n">prev</span> <span class="o">=</span> <span class="n">room</span>
+                <span class="n">next_room</span><span class="o">.</span><span class="n">traversal_mode</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">to_visit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_room</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="resources">
 <h1>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h1>
 <p>Breadth-first search. (2020). Retrieved September 19, from <a class="reference external" href="https://en.wikipedia.org/wiki/Breadth-first_search">https://en.wikipedia.org/wiki/Breadth-first_search</a>.</p>
@@ -194,7 +227,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="middle.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="middle.html" class="btn btn-neutral float-left" title="From ASCII Maze to Adjacent List: A Series of Transforms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

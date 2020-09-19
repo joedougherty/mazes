@@ -34,6 +34,44 @@ Breadth-first Search:
 
 
 
+----------------------------
+Looking at an Implementation
+----------------------------
+
+
+Here's some sample code to compare it to the pseudocode above!
+
+
+.. code-block:: python
+
+    # Source: $ROOT/functionalish.py
+    def bfs(adjlist, start_coords, goal_coords):
+        to_visit = deque()
+        visited = set()
+
+        root = adjlist[start_coords]
+        root.traversal_mode = True
+
+        to_visit.append(root)
+
+        while to_visit:
+            room = to_visit.popleft()
+            visited.add(room)
+
+            if room.coords == goal_coords:
+                return room
+
+            # Find adjacent edges that haven't been visited
+            for coords in room.neighbors:
+                next_room = adjlist[coords]
+                if next_room not in visited:
+                    next_room.prev = room
+                    next_room.traversal_mode = True
+                    to_visit.append(next_room)
+        return False
+
+
+
 ---------
 Resources
 ---------

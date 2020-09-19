@@ -2,7 +2,7 @@ from blessings import Terminal
 
 from collections import OrderedDict, deque
 
-from mazeutils import ascii_maze2matrix, matrix2str
+from mazeutils import str2matrix, matrix2str
 
 
 t = Terminal()
@@ -75,7 +75,13 @@ class Maze:
     :type  room_width: int
     """
     def __init__(self, maze_as_matrix, path, wall, room_width=2):
-        self.matrix = maze_as_matrix
+        if isinstance(maze_as_matrix, str):
+            self.maze_as_matrix = str2matrix(maze_as_matrix)
+        elif isistance(maze_as_matrix, list):
+            self.maze_as_matrix = maze_as_matrix
+        else:
+            msg = 'Maze needs to be instantiated w/ a str or list of lists. I received: {maze_as_matrix} of type: {type(maze_as_matrix)}.'
+            raise TypeError(msg)
         self.path = path
         self.wall = wall
         self.room_width = room_width
@@ -264,3 +270,10 @@ class Maze:
             rooms.reverse()
 
         return rooms
+
+    def __repr__(self):
+        height, width = len(self.matrix), len(self.matrix[0])
+        total_rooms = self.count_path_nodes()
+
+        desc = '''A {} x {} maze with {} rooms.\n`.as_ascii()` prints an ASCII representation of the maze.'''
+        return desc.format(height, width, total_rooms)
