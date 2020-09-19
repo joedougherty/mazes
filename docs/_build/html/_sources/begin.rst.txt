@@ -132,7 +132,7 @@ The cells ``adj_matrix[0][4]`` and ``adj_matrix[4][0]`` both contain ``1`` -- th
     Note that this representation repeats information. Each (possible) node connection is specified twice.
 
 
-Ajdacency Matrices make it fast and easy to determine if nodes are *self-referential*. Look down the diagonal from the upper-left corner of the matrix down the lower-right corner. Notice that all the values are 0. This means that no nodes intersect with themselves. In other words, each node only connects to other nodes.
+Ajdacency Matrices make it fast and easy to determine if nodes are *self-referential*. Look down the diagonal from the upper-left corner of the matrix down the lower-right corner. Notice that all the values are ``0``. This means that no nodes intersect with themselves. In other words, each node only connects to other nodes.
 
 
 
@@ -168,6 +168,17 @@ Example
 
     Note that this representation potentially makes it less efficient to check if two *arbitrary* nodes are connected.
 
+
+
+++++++++++++++++++
+Choosing a Method
+++++++++++++++++++
+
+Skiena compares adjacency lists and adjacency matrices on p. 152 of *The Algorithm Design Manual* (2008).
+
+While adjacency matrices make it faster to test if two nodes are immediate neighbors and also support fast edge insertion and deletion, adjacency lists offer better traversal speed and less memory usage on average.
+
+"*Take-Home Lesson:* Adjacency lists are the right data structure for most applications of graphs." (Skiena) 
 
 
 

@@ -6,20 +6,13 @@
 Welcome to The Minotaur's Mini-Tour!
 ====================================
 
+*Looking at methods to solve mazes without all the bull.*
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    install.rst
    begin.rst
    middle.rst
    end.rst
-
-=============
-Introduction
-=============
-
-
-Looking at methods to solve mazes without all the bull.
-
 

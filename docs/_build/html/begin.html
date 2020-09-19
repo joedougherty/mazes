@@ -82,8 +82,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation (Optional)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Defining Our Terms</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#maze"><strong>Maze</strong></a></li>
@@ -106,6 +105,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id4">Example</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#choosing-a-method">Choosing a Method</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="middle.html">From ASCII Maze to Adjacency List: A Series of Transforms</a></li>
@@ -268,7 +268,7 @@ E       F
 <p class="admonition-title">Attention</p>
 <p>Note that this representation repeats information. Each (possible) node connection is specified twice.</p>
 </div>
-<p>Ajdacency Matrices make it fast and easy to determine if nodes are <em>self-referential</em>. Look down the diagonal from the upper-left corner of the matrix down the lower-right corner. Notice that all the values are 0. This means that no nodes intersect with themselves. In other words, each node only connects to other nodes.</p>
+<p>Ajdacency Matrices make it fast and easy to determine if nodes are <em>self-referential</em>. Look down the diagonal from the upper-left corner of the matrix down the lower-right corner. Notice that all the values are <code class="docutils literal notranslate"><span class="pre">0</span></code>. This means that no nodes intersect with themselves. In other words, each node only connects to other nodes.</p>
 </div>
 </div>
 <div class="section" id="adjacency-list">
@@ -295,6 +295,12 @@ E       F
 <p>Note that this representation potentially makes it less efficient to check if two <em>arbitrary</em> nodes are connected.</p>
 </div>
 </div>
+</div>
+<div class="section" id="choosing-a-method">
+<h2>Choosing a Method<a class="headerlink" href="#choosing-a-method" title="Permalink to this headline">¶</a></h2>
+<p>Skiena compares adjacency lists and adjacency matrices on p. 152 of <em>The Algorithm Design Manual</em> (2008).</p>
+<p>While adjacency matrices make it faster to test if two nodes are immediate neighbors and also support fast edge insertion and deletion, adjacency lists offer better traversal speed and less memory usage on average.</p>
+<p>“<em>Take-Home Lesson:</em> Adjacency lists are the right data structure for most applications of graphs.” (Skiena)</p>
 </div>
 </div>
 

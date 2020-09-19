@@ -170,4 +170,15 @@ Example
 
 
 
+++++++++++++++++++
+Choosing a Method
+++++++++++++++++++
+
+Skiena compares adjacency lists and adjacency matrices on p. 152 of *The Algorithm Design Manual* (2008).
+
+While adjacency matrices make it faster to test if two nodes are immediate neighbors and also support fast edge insertion and deletion, adjacency lists offer better traversal speed and less memory usage on average.
+
+"*Take-Home Lesson:* Adjacency lists are the right data structure for most applications of graphs." (Skiena) 
+
+
 
