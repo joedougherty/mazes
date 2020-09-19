@@ -16,7 +16,7 @@ How can transform what we have above into an Adjacency List?
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Step 1: Use an intermediate form: The *Maze as Nested List*
+Step 1: Use an intermediate form: Maze as Nested List
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -75,6 +75,7 @@ Here's the spec:
         row, col = coords
 
         if any((row < 0, row > height - 1, col < 0, col > width - 1)):
+            # Ensure we're within the expected bounds
             return False
         elif nested_list[row][col] == PATH:
             return (row, col)
