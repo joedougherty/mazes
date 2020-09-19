@@ -74,11 +74,11 @@ class Maze:
     :param room_width: How wide the rooms are (function of max # of digits it takes to represent highest numbered node)
     :type  room_width: int
     """
-    def __init__(self, maze_as_matrix, path, wall, room_width=2):
-        if isinstance(maze_as_matrix, str):
-            self.maze_as_matrix = str2nested_list(maze_as_matrix)
+    def __init__(self, input_maze, path, wall, room_width=2):
+        if isinstance(input_maze, str):
+            self.maze_as_matrix = str2nested_list(input_maze)
         elif isistance(maze_as_matrix, list):
-            self.maze_as_matrix = maze_as_matrix
+            self.maze_as_matrix = input_maze
         else:
             msg = 'Maze needs to be instantiated w/ a str or list of lists. I received: {maze_as_matrix} of type: {type(maze_as_matrix)}.'
             raise TypeError(msg)
@@ -99,13 +99,13 @@ class Maze:
             highlight_rooms = []
 
         new_rep = []
-        for r_idx, row in enumerate(self.matrix):
+        for r_idx, row in enumerate(self.maze_as_matrix):
             new_row = []
             for c_idx, col in enumerate(row):
                 if col == self.wall:
                     new_row.append("#")
                 elif col == self.path and (r_idx, c_idx) in highlight_rooms:
-                    new_row.append(t.red("*"))
+                    new_row.append(t.bright_red("*"))
                 elif col == self.path:
                     new_row.append(" ")
                 else:
@@ -113,11 +113,11 @@ class Maze:
                         "Matrices must be composed of only {self.path} and {self.wall}!"
                     )
             new_rep.append(new_row)
-        print(matrix2str(new_rep))
+        print(nested_list2str(new_rep))
 
     def count_path_nodes(self):
-        """ Returns the total number of nodes that match `self.path` in self.matrix. """
-        return sum([r.count(self.path) for r in self.matrix])
+        """ Returns the total number of nodes that match `self.path` in self.maze_as_matrix. """
+        return sum([r.count(self.path) for r in self.maze_as_matrix])
 
     def diagram_path(self, int_width=None, highlight_rooms=None):
         """
@@ -130,7 +130,7 @@ class Maze:
             int_width = self.room_width
 
         path = []
-        for r_idx, row in enumerate(self.matrix):
+        for r_idx, row in enumerate(self.maze_as_matrix):
             new_row = []
             for c_idx, col in enumerate(row):
                 row_rep, col_rep = str(r_idx).zfill(2), str(c_idx).zfill(2)
@@ -155,12 +155,12 @@ class Maze:
                 # it's out of bounds or not a path room
                 return False
         """
-        width, height = len(self.matrix[0]), len(self.matrix)
+        width, height = len(self.maze_as_matrix[0]), len(self.maze_as_matrix)
         row, col = coords
 
         if any((row < 0, row > height - 1, col < 0, col > width - 1)):
             return False
-        elif self.matrix[row][col] == self.path:
+        elif self.maze_as_matrix[row][col] == self.path:
             return (row, col)
         else:
             return False
@@ -185,7 +185,7 @@ class Maze:
 
     def to_adjlist(self):
         """
-        Creates an adjacency list from `self.matrix`.
+        Creates an adjacency list from `self.maze_as_matrix`.
 
         Returns adjacenct list as a dict where:
             key -> coords,
@@ -210,7 +210,7 @@ class Maze:
         """
         adjlist = OrderedDict()
 
-        for row_idx, row in enumerate(self.matrix):
+        for row_idx, row in enumerate(self.maze_as_matrix):
             for col_idx, c in enumerate(row):
                 coords = (row_idx, col_idx)
                 if self.discover_room(coords):
@@ -272,7 +272,7 @@ class Maze:
         return rooms
 
     def __repr__(self):
-        height, width = len(self.matrix), len(self.matrix[0])
+        height, width = len(self.maze_as_matrix), len(self.maze_as_matrix[0])
         total_rooms = self.count_path_nodes()
 
         desc = '''A {} x {} maze with {} rooms.\n`.as_ascii()` prints an ASCII representation of the maze.'''
