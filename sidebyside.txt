@@ -1,0 +1,22 @@
+                                                            |
+                                                            |
+                                                            |
+procedure BFS(G, root) is                                   |  def bfs(adjlist, start_coords, goal_coords):
+	let Q be a queue                                        |      to_visit = deque(), visited = set()
+	label root as discovered                                |      root = adjlist[start_coords]
+    Q.enqueue(root)                                         |      to_visit.append(root)
+	                                                        |      
+                                                            |      
+	while Q is not empty do                                 |      while to_visit:
+		v := Q.dequeue()                                    |          room = to_visit.popleft()
+                                                            |		   visited.add(room)
+                                                            |
+		if v is the goal then                               |          if room.coords == goal.coords:
+			return v                                        |              return room 
+                                                            | 
+		for all edges from v to w in G.adjacentEdges(v) do  |          for coords in room.neighbors: 
+                                                            |              next_room = adjlist[coords]
+			if w is not labeled as discovered then          |              if next_room not in visited:  
+				label w as discovered                       |                  next_room.prev = room
+				w.parent := v                               |                  to_visit.append(next_room) 
+				Q.enqueue(w)                                |
