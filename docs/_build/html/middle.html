@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="begin.html">Defining Our Terms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="begin.html#lil-labyrinth-methods-of-maze-representation">‘Lil Labyrinth: Methods of Maze Representation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">From ASCII Maze to Adjacency List: A Series of Transforms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#an-intermediate-form-the-input-matrix">An intermediate form: The “Input Matrix”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#an-intermediate-form-the-maze-as-nested-list">An intermediate form: The <em>Maze as Nested List</em></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="end.html">A Review of BFS</a></li>
@@ -168,8 +168,13 @@
 </pre></div>
 </div>
 <p>How can transform what we have into a form that allows easy querying?</p>
-<div class="section" id="an-intermediate-form-the-input-matrix">
-<h2>An intermediate form: The “Input Matrix”<a class="headerlink" href="#an-intermediate-form-the-input-matrix" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="an-intermediate-form-the-maze-as-nested-list">
+<h2>An intermediate form: The <em>Maze as Nested List</em><a class="headerlink" href="#an-intermediate-form-the-maze-as-nested-list" title="Permalink to this headline">¶</a></h2>
+<p>Let’s convert the ASCII maze to a list of lists.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">str2nested_list</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">delim</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">maze_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
 </div>
 </div>
 

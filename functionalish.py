@@ -3,46 +3,45 @@ from collections import OrderedDict
 
 
 from classymaze import Room
-from mazeutils import ascii_maze2matrix, matrix2str
+from mazeutils import str2nested_list, nested_list2str 
 
 
 
-PATH = 0
-WALL = 1
+PATH, WALL = ' ', '#'
 
 
-def find_neighbors(coords, matrix):
+def find_neighbors(coords, nested_list):
     row, col = coords
 
     visited = (
-        discover_room((row - 1, col), matrix),  # North
-        discover_room((row + 1, col), matrix),  # South
-        discover_room((row, col - 1), matrix),  # East
-        discover_room((row, col + 1), matrix),  # West
+        discover_room((row - 1, col), nested_list),  # North
+        discover_room((row + 1, col), nested_list),  # South
+        discover_room((row, col - 1), nested_list),  # East
+        discover_room((row, col + 1), nested_list),  # West
     )
     return [v for v in visited if isinstance(v, tuple)]
 
 
-def discover_room(coords, matrix):
-    width, height = len(matrix[0]), len(matrix)
+def discover_room(coords, nested_list):
+    width, height = len(nested_list[0]), len(nested_list)
     row, col = coords
 
     if any((row < 0, row > height - 1, col < 0, col > width - 1)):
         return False
-    elif matrix[row][col] == PATH:
+    elif nested_list[row][col] == PATH:
         return (row, col)
     else:
         return False
 
 
-def matrix2adjlist(matrix):
+def nested_list2adjlist(nested_list):
     adjlist = OrderedDict()
 
-    for row_idx, row in enumerate(matrix):
+    for row_idx, row in enumerate(nested_list):
         for col_idx, c in enumerate(row):
             coords = (row_idx, col_idx)
-            if discover_room(coords, matrix):
-                new_room = Room(coords, find_neighbors(coords, matrix))
+            if discover_room(coords, nested_list):
+                new_room = Room(coords, find_neighbors(coords, nested_list))
                 adjlist.update({coords: new_room})
     return adjlist
 

@@ -1,5 +1,5 @@
 from functionalish import matrix2adjlist, bfs
-from mazeutils import ascii_maze2matrix, matrix2str
+from mazeutils import str2nested_list, nested_list2str
 
 # Source:
 #   https://py.checkio.org/en/mission/open-labyrinth/share/574bd1ded68c9705c5d6f07c6206be12/
