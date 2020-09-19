@@ -42,7 +42,7 @@ Taking a cue from `this article <http://bryukh.com/labyrinth-algorithms/>`_, the
 Here's the spec:
 
 + ``key`` -> coordinates of the room in the maze, expressed as a tuple (``row``, ``col``).
-+ ``value`` -> the ``Room`` instance of the current room. Each ``Room`` instance has a ``.neighbors`` attribute which is a list of coordinates of nreighboring cells that can be reached from this room.
++ ``value`` -> the ``Room`` instance of the current room. Each ``Room`` instance has a ``.neighbors`` attribute: a list of coordinates of neighboring cells that can be reached from this room.
 
 
 .. code-block:: python
@@ -74,10 +74,12 @@ Here's the spec:
         width, height = len(nested_list[0]), len(nested_list)
         row, col = coords
 
-        if any((row < 0, row > height - 1, col < 0, col > width - 1)):
-            # Ensure we're within the expected bounds
+        if any((row < 0, row > height - 1, col < 0, col > width - 1)): # bounds check
             return False
         elif nested_list[row][col] == PATH:
             return (row, col)
         else:
             return False
+
+
+Use the coords of the Room in question as the key. If that space has a room, it will provide the ``Room`` object, which will contain ``.neighbors``. Are you starting to see how we can traverse this data structure?
