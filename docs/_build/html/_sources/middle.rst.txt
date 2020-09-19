@@ -107,4 +107,19 @@ Here's the spec:
 
 Use the coords of the Room in question as the key. If that space has a room, it will provide the ``Room`` object, which will contain ``.neighbors``. 
 
+Here is the resulting Adjacency List for the ``tiny`` labyrinth (with some formatting):
+
+.. code-block:: python
+
+    OrderedDict([
+        ((1, 1), Neighbors=[(2, 1), (1, 2)], Intersection=False, Dead End=False),
+        ((1, 2), Neighbors=[(1, 1), (1, 3)], Intersection=False, Dead End=False),
+        ((1, 3), Neighbors=[(2, 3), (1, 2), (1, 4)], Intersection=True, Dead End=False),
+        ((1, 4), Neighbors=[(1, 3)], Intersection=False, Dead End=True),
+        ((2, 1), Neighbors=[(1, 1)], Intersection=False, Dead End=True),
+        ((2, 3), Neighbors=[(1, 3)], Intersection=False, Dead End=True)
+    ])
+
+
+
 Are you starting to see how we can traverse this data structure?
