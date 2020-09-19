@@ -12,7 +12,7 @@ From ASCII Maze to Adjacency List: A Series of Transforms
     
 
 
-How can transform what we have above into an Adjacency List?
+How can transform this string into an Adjacency List?
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

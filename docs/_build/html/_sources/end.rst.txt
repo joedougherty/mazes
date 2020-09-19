@@ -76,8 +76,6 @@ Here's some sample code to compare it to the pseudocode above!
 Resources
 ---------
 
-Breadth-first search. (2020). Retrieved September 19, from https://en.wikipedia.org/wiki/Breadth-first_search. 
-
 
 https://www.dcode.fr/maze-generator
 
@@ -86,6 +84,12 @@ https://www.khanacademy.org/computing/computer-science/algorithms/graph-represen
 
 
 https://py.checkio.org/en/mission/open-labyrinth/share/574bd1ded68c9705c5d6f07c6206be12/
+
+
+http://bryukh.com/labyrinth-algorithms/
+
+
+Breadth-first search. (2020). Retrieved September 19, from https://en.wikipedia.org/wiki/Breadth-first_search. 
 
 
 Skiena, S. (2008) *The Algorithm Design Manual* IBSN: 9781848000698

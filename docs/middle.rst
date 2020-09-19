@@ -12,7 +12,7 @@ From ASCII Maze to Adjacency List: A Series of Transforms
     
 
 
-How can transform what we have above into an Adjacency List?
+How can transform this string into an Adjacency List?
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -26,7 +26,7 @@ Let's convert the ASCII maze into a list of lists. Much nicer to work with.
 .. code-block:: python
 
     def str2nested_list(s, delim='\n'):
-        return [list(e) for e in maze_str.split('\n')]
+        return [list(e) for e in s.split('\n')]
 
 
 That was easy enough!
