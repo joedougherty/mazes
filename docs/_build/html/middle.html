@@ -173,7 +173,7 @@
 <h2>Step 1: Use an intermediate form: Maze as Nested List<a class="headerlink" href="#step-1-use-an-intermediate-form-maze-as-nested-list" title="Permalink to this headline">¶</a></h2>
 <p>Let’s convert the ASCII maze into a list of lists. Much nicer to work with.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">str2nested_list</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">delim</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">maze_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p>That was easy enough!</p>
@@ -221,7 +221,8 @@
         <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </div>
-<p>Use the coords of the Room in question as the key. If that space has a room, it will provide the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object, which will contain <code class="docutils literal notranslate"><span class="pre">.neighbors</span></code>. Are you starting to see how we can traverse this data structure?</p>
+<p>Use the coords of the Room in question as the key. If that space has a room, it will provide the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object, which will contain <code class="docutils literal notranslate"><span class="pre">.neighbors</span></code>.</p>
+<p>Are you starting to see how we can traverse this data structure?</p>
 </div>
 </div>
 

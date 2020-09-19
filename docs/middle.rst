@@ -82,4 +82,6 @@ Here's the spec:
             return False
 
 
-Use the coords of the Room in question as the key. If that space has a room, it will provide the ``Room`` object, which will contain ``.neighbors``. Are you starting to see how we can traverse this data structure?
+Use the coords of the Room in question as the key. If that space has a room, it will provide the ``Room`` object, which will contain ``.neighbors``. 
+
+Are you starting to see how we can traverse this data structure?

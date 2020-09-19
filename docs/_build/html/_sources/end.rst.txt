@@ -1,3 +1,5 @@
+.. _bfs-review:
+
 -----------------
 A Review of BFS
 -----------------
@@ -6,21 +8,21 @@ A Review of BFS
 
 
 .. code-block:: text 
+  :linenos:
 
-
-	1  procedure BFS(G, root) is
-	2      let Q be a queue
-	3      label root as discovered	
-	4      Q.enqueue(root)			                              
-	5      while Q is not empty do
-	6          v := Q.dequeue()
-	7          if v is the goal then
-	8              return v
-	9          for all edges from v to w in G.adjacentEdges(v) do
-	10             if w is not labeled as discovered then
-	11                 label w as discovered
-	12                 w.parent := v
-	13                 Q.enqueue(w)
+    procedure BFS(G, root) is
+        let Q be a queue
+        label root as discovered	
+        Q.enqueue(root)			                              
+        while Q is not empty do
+            v := Q.dequeue()
+            if v is the goal then
+                return v
+            for all edges from v to w in G.adjacentEdges(v) do
+                if w is not labeled as discovered then
+                    label w as discovered
+                    w.parent := v
+                    Q.enqueue(w)
 
 
 Breadth-first Search:
@@ -33,6 +35,7 @@ Breadth-first Search:
 **C**. proceeds by visiting them and continuing this process until there are no new nodes left to discover and visit (line 5)
 
 
+.. _implementation:
 
 ----------------------------
 Looking at an Implementation
@@ -43,6 +46,7 @@ Here's some sample code to compare it to the pseudocode above!
 
 
 .. code-block:: python
+   :linenos:
 
     # Source: $ROOT/functionalish.py
     def bfs(adjlist, start_coords, goal_coords):
@@ -50,7 +54,6 @@ Here's some sample code to compare it to the pseudocode above!
         visited = set()
 
         root = adjlist[start_coords]
-        root.traversal_mode = True
 
         to_visit.append(root)
 
@@ -66,9 +69,53 @@ Here's some sample code to compare it to the pseudocode above!
                 next_room = adjlist[coords]
                 if next_room not in visited:
                     next_room.prev = room
-                    next_room.traversal_mode = True
                     to_visit.append(next_room)
         return False
+
+
+-------------------
+Pathfinding
+-------------------
+
+
+This ``bfs`` function returns a reference to the found room (if, you know, it's found). 
+
+
+How can we use this to find a path back to the start?
+
+
++++++++++++++++++
+``Room.prev``
++++++++++++++++++
+
+
+
+Take notice of line 12 of the code sample in :ref:`bfs-review`. The same functionality appears on line 21 of :ref:`implementation`. 
+
+Prior to adding new room to the ``to_visit`` queue, we note down that ``Room`` coordinates we're in now. This way, we can walk back up the ``Room.prev`` recursively until we get to a ``Room`` where ``.prev is None``.
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+A Brief Diversion: printing a linked list with recursive ``__repr__`` 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+There's a way to print the path by only referencing the final room in the path. 
+
+.. code-block:: python
+ :linenos:
+
+    class Node:
+        def __init__(self, val, parent=None):
+            self.val = val 
+            self.parent = parent
+
+        def __repr__(self):
+            if self.parent:
+                # Here's the (implict) recursive call!
+                return f'''{self.parent} <- {self.val}'''
+            else:
+                return f'''{self.val}'''
+
 
 
 
@@ -87,6 +134,9 @@ https://py.checkio.org/en/mission/open-labyrinth/share/574bd1ded68c9705c5d6f07c6
 
 
 http://bryukh.com/labyrinth-algorithms/
+
+
+https://stackoverflow.com/questions/1984162/purpose-of-pythons-repro
 
 
 Breadth-first search. (2020). Retrieved September 19, from https://en.wikipedia.org/wiki/Breadth-first_search. 
