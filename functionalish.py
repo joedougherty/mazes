@@ -2,7 +2,7 @@ from itertools import count
 from collections import OrderedDict
 
 
-from classymaze import Cell
+from classymaze import Room
 from mazeutils import ascii_maze2matrix, matrix2str
 
 
@@ -15,15 +15,15 @@ def find_neighbors(coords, matrix):
     row, col = coords
 
     visited = (
-        discover_cell((row - 1, col), matrix),  # North
-        discover_cell((row + 1, col), matrix),  # South
-        discover_cell((row, col - 1), matrix),  # East
-        discover_cell((row, col + 1), matrix),  # West
+        discover_room((row - 1, col), matrix),  # North
+        discover_room((row + 1, col), matrix),  # South
+        discover_room((row, col - 1), matrix),  # East
+        discover_room((row, col + 1), matrix),  # West
     )
     return [v for v in visited if isinstance(v, tuple)]
 
 
-def discover_cell(coords, matrix):
+def discover_room(coords, matrix):
     width, height = len(matrix[0]), len(matrix)
     row, col = coords
 
@@ -41,9 +41,9 @@ def matrix2adjlist(matrix):
     for row_idx, row in enumerate(matrix):
         for col_idx, c in enumerate(row):
             coords = (row_idx, col_idx)
-            if discover_cell(coords, matrix):
-                new_cell = Cell(coords, find_neighbors(coords, matrix))
-                adjlist.update({coords: new_cell})
+            if discover_room(coords, matrix):
+                new_room = Room(coords, find_neighbors(coords, matrix))
+                adjlist.update({coords: new_room})
     return adjlist
 
 
@@ -57,19 +57,19 @@ def bfs(adjlist, start_coords, goal_coords):
     to_visit.append(root)
 
     while to_visit:
-        cell = to_visit.popleft()
-        visited.add(cell)
+        room = to_visit.popleft()
+        visited.add(room)
 
-        if cell.coords == goal_coords:
-            return cell
+        if room.coords == goal_coords:
+            return room
 
         # Find adjacent edges that haven't been visited
-        for coords in cell.neighbors:
-            next_cell = adjlist[coords]
-            if next_cell not in visited:
-                next_cell.prev = cell
-                next_cell.traversal_mode = True
-                to_visit.append(next_cell)
+        for coords in room.neighbors:
+            next_room = adjlist[coords]
+            if next_room not in visited:
+                next_room.prev = room
+                next_room.traversal_mode = True
+                to_visit.append(next_room)
     return False
 
 

@@ -1,4 +1,4 @@
-def ascii_maze2matrix(ascii_maze, path, wall):
+def ascii_maze2input_matrix(ascii_maze, path, wall):
     matrix = []
     for row in ascii_maze.split('\n'):
         new_row = []
