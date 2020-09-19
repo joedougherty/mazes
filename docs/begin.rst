@@ -132,7 +132,7 @@ The cells ``adj_matrix[0][4]`` and ``adj_matrix[4][0]`` both contain ``1`` -- th
     Note that this representation repeats information. Each (possible) node connection is specified twice.
 
 
-Ajdacency Matrices make it fast and easy to determine if nodes are *self-referential*. Look down the diagonal from the upper-left corner of the matrix down the lower-right corner. Notice that all the values are 0. This means that no nodes intersect with themselves. In other words, each node only connects to other nodes.
+Ajdacency Matrices make it fast and easy to determine if nodes are *self-referential*. Look down the diagonal from the upper-left corner of the matrix down the lower-right corner. Notice that all the values are ``0``. This means that no nodes intersect with themselves. In other words, each node only connects to other nodes.
 
 
 
@@ -166,7 +166,7 @@ Example
 
 .. ATTENTION::
 
-    Note that this representation potentially makes it less efficient to check if two nodes are connected.
+    Note that this representation potentially makes it less efficient to check if two *arbitrary* nodes are connected.
 
 
 

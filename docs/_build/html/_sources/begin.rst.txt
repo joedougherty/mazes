@@ -166,7 +166,7 @@ Example
 
 .. ATTENTION::
 
-    Note that this representation potentially makes it less efficient to check if two nodes are connected.
+    Note that this representation potentially makes it less efficient to check if two *arbitrary* nodes are connected.
 
 
 
