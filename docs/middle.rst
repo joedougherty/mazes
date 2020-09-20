@@ -23,11 +23,11 @@ Step 1: Use an intermediate form: Maze as Nested List
 .. code-block:: python
     
     tiny = '''
-######
-#    #
-# # ##
-######
-'''.strip()
+    ######
+    #    #
+    # # ##
+    ######
+    '''.strip()
 
 
 
