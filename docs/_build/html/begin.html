@@ -110,8 +110,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="middle.html">From an ASCII Maze to an Adjacency List</a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html">A Review of BFS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="end.html#looking-at-an-implementation">Looking at an Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="end.html#looking-at-an-implementation-of-bfs-against-an-adjacency-list">Looking at an Implementation of BFS against an Adjacency List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="end.html#anatomy-of-a-room">Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html#pathfinding">Pathfinding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="end.html#visualization">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html#resources">Resources</a></li>
 </ul>
 
@@ -188,8 +190,12 @@
 </div>
 <div class="section" id="room">
 <h2><strong>Room</strong><a class="headerlink" href="#room" title="Permalink to this headline">¶</a></h2>
-<p>A <strong>Room</strong> can have neighbors to the North, West, East, and South. Thus, each <strong>Room</strong> has a max of four immediately adjacent neighbors.</p>
-<p>A <strong>Room</strong> must have at least one neighbor (at least, if you ever hope to get to it).</p>
+<ul class="simple">
+<li><p>A <strong>Room</strong> can have neighbors to the North, West, East, and South.</p></li>
+<li><p>Each <strong>Room</strong> has a max of four immediately adjacent neighbors.</p></li>
+<li><p>A <strong>Room</strong> must have at least one neighbor (at least, if you ever hope to get to it).</p></li>
+</ul>
+<p>As a consequence, we don’t worry about diagonal movement on the grid.</p>
 </div>
 </div>
 <div class="section" id="lil-labyrinth-methods-of-maze-representation">

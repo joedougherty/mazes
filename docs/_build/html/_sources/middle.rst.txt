@@ -37,7 +37,7 @@ Let's convert this ASCII maze, ``tiny``  into a list of lists. Much nicer to wor
 .. code-block:: python
 
     def str2nested_list(s, delim='\n'):
-        return [list(e) for e in s.split('\n')]
+        return [list(e) for e in s.split(delim)]
 
 
     tiny_nested_list = str2nested_list(tiny)
@@ -70,6 +70,30 @@ Here's the spec:
 
 .. code-block:: python
 
+
+    # Helper functions
+    def discover_room(coords, nested_list):
+        width, height = len(nested_list[0]), len(nested_list)
+        row, col = coords
+
+        if any((row < 0, row > height - 1, col < 0, col > width - 1)): # bounds check
+            return False
+        elif nested_list[row][col] == PATH:
+            return (row, col)
+        else:
+            return False
+    
+    def find_neighbors(coords, nested_list):
+        row, col = coords
+
+        visited = (
+            discover_room((row - 1, col), nested_list),  # North
+            discover_room((row + 1, col), nested_list),  # South
+            discover_room((row, col - 1), nested_list),  # East
+            discover_room((row, col + 1), nested_list),  # West
+        )
+        return [v for v in visited if isinstance(v, tuple)]
+     
     def nested_list2adjlist(nested_list):
         adjlist = OrderedDict()
 
@@ -81,28 +105,6 @@ Here's the spec:
                     adjlist.update({coords: new_room})
         return adjlist
 
-    # Helpers
-    def find_neighbors(coords, nested_list):
-        row, col = coords
-
-        visited = (
-            discover_room((row - 1, col), nested_list),  # North
-            discover_room((row + 1, col), nested_list),  # South
-            discover_room((row, col - 1), nested_list),  # East
-            discover_room((row, col + 1), nested_list),  # West
-        )
-        return [v for v in visited if isinstance(v, tuple)]
-
-    def discover_room(coords, nested_list):
-        width, height = len(nested_list[0]), len(nested_list)
-        row, col = coords
-
-        if any((row < 0, row > height - 1, col < 0, col > width - 1)): # bounds check
-            return False
-        elif nested_list[row][col] == PATH:
-            return (row, col)
-        else:
-            return False
 
 
 Use the coords of the Room in question as the key. If that space has a room, it will provide the ``Room`` object, which will contain ``.neighbors``. 

@@ -183,7 +183,7 @@
 </div>
 <p>Let’s convert this ASCII maze, <code class="docutils literal notranslate"><span class="pre">tiny</span></code>  into a list of lists. Much nicer to work with.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">str2nested_list</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">delim</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delim</span><span class="p">)]</span>
 
 
 <span class="n">tiny_nested_list</span> <span class="o">=</span> <span class="n">str2nested_list</span><span class="p">(</span><span class="n">tiny</span><span class="p">)</span>
@@ -206,18 +206,18 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">key</span></code> -&gt; coordinates of the room in the maze, expressed as a tuple (<code class="docutils literal notranslate"><span class="pre">row</span></code>, <code class="docutils literal notranslate"><span class="pre">col</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> -&gt; the <code class="docutils literal notranslate"><span class="pre">Room</span></code> instance of the current room. Each <code class="docutils literal notranslate"><span class="pre">Room</span></code> instance has a <code class="docutils literal notranslate"><span class="pre">.neighbors</span></code> attribute: a list of coordinates of neighboring cells that can be reached from this room.</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nested_list2adjlist</span><span class="p">(</span><span class="n">nested_list</span><span class="p">):</span>
-    <span class="n">adjlist</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Helper functions</span>
+<span class="k">def</span> <span class="nf">discover_room</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nested_list</span><span class="p">):</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nested_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nested_list</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">coords</span>
 
-    <span class="k">for</span> <span class="n">row_idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nested_list</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">col_idx</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
-            <span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">discover_room</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nested_list</span><span class="p">):</span>
-                <span class="n">new_room</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">find_neighbors</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nested_list</span><span class="p">))</span>
-                <span class="n">adjlist</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">coords</span><span class="p">:</span> <span class="n">new_room</span><span class="p">})</span>
-    <span class="k">return</span> <span class="n">adjlist</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">row</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">row</span> <span class="o">&gt;</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">col</span> <span class="o">&gt;</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span> <span class="c1"># bounds check</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">elif</span> <span class="n">nested_list</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">PATH</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-<span class="c1"># Helpers</span>
 <span class="k">def</span> <span class="nf">find_neighbors</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nested_list</span><span class="p">):</span>
     <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">coords</span>
 
@@ -229,16 +229,16 @@
     <span class="p">)</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">visited</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)]</span>
 
-<span class="k">def</span> <span class="nf">discover_room</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nested_list</span><span class="p">):</span>
-    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nested_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nested_list</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">coords</span>
+<span class="k">def</span> <span class="nf">nested_list2adjlist</span><span class="p">(</span><span class="n">nested_list</span><span class="p">):</span>
+    <span class="n">adjlist</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">row</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">row</span> <span class="o">&gt;</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">col</span> <span class="o">&gt;</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span> <span class="c1"># bounds check</span>
-        <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">elif</span> <span class="n">nested_list</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">PATH</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">row_idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nested_list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">col_idx</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">discover_room</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nested_list</span><span class="p">):</span>
+                <span class="n">new_room</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">find_neighbors</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nested_list</span><span class="p">))</span>
+                <span class="n">adjlist</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">coords</span><span class="p">:</span> <span class="n">new_room</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">adjlist</span>
 </pre></div>
 </div>
 <p>Use the coords of the Room in question as the key. If that space has a room, it will provide the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object, which will contain <code class="docutils literal notranslate"><span class="pre">.neighbors</span></code>.</p>
