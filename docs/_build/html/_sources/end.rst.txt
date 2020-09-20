@@ -101,6 +101,39 @@ There are also some derived attributes. The existence of a derived attribute on 
 + ``.is_intersection``: Does this room have more than 2 neighbors?
 + ``.is_dead_end``: Is there only one way in / out of this room?
 
+
+Here's the implementation:
+
+
+.. code-block:: python
+
+    class Room:
+        def __init__(self, coords, neighbors=None, traversal_mode=False):
+            self.coords = coords
+            if neighbors:
+                self.neighbors = neighbors
+            else:
+                self.neighbors = []
+
+            # Derived Attributes
+            self.row, self.col = self.coords
+            self.is_intersection = len(self.neighbors) > 2
+            self.is_dead_end = len(self.neighbors) == 1
+
+            # These don't come into play until the traversal stage
+            self.prev = None
+            self.traversal_mode = traversal_mode
+
+        def __repr__(self):
+            if self.traversal_mode and self.prev:
+                return f"""{self.prev} -> {self.coords}"""
+            elif self.traversal_mode and not self.prev:
+                return f"""{self.coords}"""
+            else:
+                return f"""Neighbors={self.neighbors}, Intersection={self.is_intersection}, Dead End={self.is_dead_end}"""
+
+
+
 -------------------
 Pathfinding
 -------------------
@@ -201,7 +234,6 @@ Visualization
 .. code-block:: text
 
     >>> tiny.as_ascii()
-
     ######
     #    #
     # # ##
@@ -217,7 +249,6 @@ Visualization
 .. code-block:: text
 
     >>> tiny.show_vertices()
-
     (01, 01)(01, 02)(01, 03)(01, 04)
     (02, 01)        (02, 03)
 

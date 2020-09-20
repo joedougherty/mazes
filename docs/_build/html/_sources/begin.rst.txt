@@ -9,9 +9,7 @@ Before we dive in, let's get some definitions squared away.
 **Maze**
 ++++++++
 
-In this context, a **Maze** is an area containing *at least two* connected **Rooms** that one must find a path through.
-
-We will be restricting ourselves to two dimensions.
+In this context, a **Maze** is an two-dimensional area containing *at least two* connected **Rooms** that one must find a path through.
 
 ++++++++
 **Room**
@@ -23,6 +21,12 @@ We will be restricting ourselves to two dimensions.
 + Each **Room** has a max of four immediately adjacent neighbors.
 
 + A **Room** must have at least one neighbor (at least, if you ever hope to get to it). 
+
+++++++++++
+**Path**
+++++++++++
+
+A list containing the coordinates of **Rooms** from the start to the end (ordering by convention).
 
 As a consequence, we don't worry about diagonal movement on the grid. 
 
@@ -47,6 +51,10 @@ Here is a small ASCII representation of a 2D labyrinth.
 + The space character (``' '``) represents a room
 
 The wall blocks define our boundaries and thus determine which direction(s) we may travel.
+
+.. NOTE::
+    We will not concern ourselves with diagonal travel. The only directions one can travel from a Room are North, East, West, and South.  
+
 
 Assigning each room a unique identifier helps to clarify the relationships.
 

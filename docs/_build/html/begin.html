@@ -87,6 +87,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Defining Our Terms</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#maze"><strong>Maze</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#room"><strong>Room</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#path"><strong>Path</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#lil-labyrinth-methods-of-maze-representation">‘Lil Labyrinth: Methods of Maze Representation</a><ul>
@@ -185,8 +186,7 @@
 <p>Before we dive in, let’s get some definitions squared away.</p>
 <div class="section" id="maze">
 <h2><strong>Maze</strong><a class="headerlink" href="#maze" title="Permalink to this headline">¶</a></h2>
-<p>In this context, a <strong>Maze</strong> is an area containing <em>at least two</em> connected <strong>Rooms</strong> that one must find a path through.</p>
-<p>We will be restricting ourselves to two dimensions.</p>
+<p>In this context, a <strong>Maze</strong> is an two-dimensional area containing <em>at least two</em> connected <strong>Rooms</strong> that one must find a path through.</p>
 </div>
 <div class="section" id="room">
 <h2><strong>Room</strong><a class="headerlink" href="#room" title="Permalink to this headline">¶</a></h2>
@@ -195,6 +195,10 @@
 <li><p>Each <strong>Room</strong> has a max of four immediately adjacent neighbors.</p></li>
 <li><p>A <strong>Room</strong> must have at least one neighbor (at least, if you ever hope to get to it).</p></li>
 </ul>
+</div>
+<div class="section" id="path">
+<h2><strong>Path</strong><a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h2>
+<p>A list containing the coordinates of <strong>Rooms</strong> from the start to the end (ordering by convention).</p>
 <p>As a consequence, we don’t worry about diagonal movement on the grid.</p>
 </div>
 </div>
@@ -212,6 +216,10 @@
 <li><p>The space character (<code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">'</span></code>) represents a room</p></li>
 </ul>
 <p>The wall blocks define our boundaries and thus determine which direction(s) we may travel.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We will not concern ourselves with diagonal travel. The only directions one can travel from a Room are North, East, West, and South.</p>
+</div>
 <p>Assigning each room a unique identifier helps to clarify the relationships.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>######
 #ABCD#
