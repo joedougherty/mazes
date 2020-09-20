@@ -18,10 +18,13 @@ We will be restricting ourselves to two dimensions.
 ++++++++
 
 
-A **Room** can have neighbors to the North, West, East, and South. Thus, each **Room** has a max of four immediately adjacent neighbors.
++ A **Room** can have neighbors to the North, West, East, and South. 
 
++ Each **Room** has a max of four immediately adjacent neighbors.
 
-A **Room** must have at least one neighbor (at least, if you ever hope to get to it). 
++ A **Room** must have at least one neighbor (at least, if you ever hope to get to it). 
+
+As a consequence, we don't worry about diagonal movement on the grid. 
 
 
 ----------------------------------------------
