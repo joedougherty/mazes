@@ -32,7 +32,7 @@ As a consequence, we don't worry about diagonal movement on the grid.
 
 
 ----------------------------------------------
-'Lil Labyrinth: Methods of Maze Representation 
+Lil' Labyrinth: Methods of Maze Representation 
 ----------------------------------------------
 
 
