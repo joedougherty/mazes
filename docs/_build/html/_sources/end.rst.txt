@@ -37,9 +37,9 @@ Breadth-first Search:
 
 .. _implementation:
 
-----------------------------
-Looking at an Implementation
-----------------------------
+---------------------------------------------------------------
+Looking at an Implementation of BFS against an Adjacency List
+---------------------------------------------------------------
 
 
 Here's some sample code to compare it to the pseudocode above!
@@ -73,12 +73,36 @@ Here's some sample code to compare it to the pseudocode above!
         return False
 
 
+-----------------------
+Anatomy of a ``Room``
+-----------------------
+
+What's in an instance of a ``Room`` object, anyway?
+
++ ``.coords``: Its address as a tuple (``row``, ``col``).
++ A list of the coordinates of neighbors to the immediate North, East, West, or South.
+
+
+Setting ``.prev`` during traversal lets us back-track top find the shortest path from the Room we are seeking back to the start.
+
++ ``.prev``: Reference to prev ``Room``
++ ``.traversal_mode``: This flag controls the string representation of a ``Room``. Sounds weird, but we want to know different aspects of the Room at different times in different contexts. This unorthodox approach lets us change how a ``Room`` is ``print()``-ed. This will be of use later.
+
+When a ``Maze`` is instantiated, the ``Rooms`` that it is composed of have ``.traversal_mode`` set to ``False``. It is only when we start looking for paths that this flag is set to ``True``.
+
+There are also some derived attributes. The existence of a derived attribute on this class does *not* imply its usage or existence outside the scope of the object in its lifetime. That's right, there may be attributes that simply don't have a purpose yet.
+
++ ``.row``: The row part of the coord.
++ ``.col``: The col part of the coord.
++ ``.is_intersection``: Does this room have more than 2 neighbors?
++ ``.is_dead_end``: Is there only one way in / out of this room?
+
 -------------------
 Pathfinding
 -------------------
 
 
-This ``bfs`` function returns a reference to the found room (if, you know, it's found). 
+This ``bfs()`` function returns a reference to the found room (if, you know, it's found). 
 
 
 How can we use this to find a path back to the start?

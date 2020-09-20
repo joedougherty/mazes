@@ -87,7 +87,8 @@
 <li class="toctree-l1"><a class="reference internal" href="begin.html#lil-labyrinth-methods-of-maze-representation">‘Lil Labyrinth: Methods of Maze Representation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="middle.html">From an ASCII Maze to an Adjacency List</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">A Review of BFS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#looking-at-an-implementation">Looking at an Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#looking-at-an-implementation-of-bfs-against-an-adjacency-list">Looking at an Implementation of BFS against an Adjacency List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#anatomy-of-a-room">Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="#pathfinding">Pathfinding</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#room-prev"><code class="docutils literal notranslate"><span class="pre">Room.prev</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#a-brief-diversion-printing-a-linked-list-with-recursive-repr">A Brief Diversion: printing a linked list with recursive <code class="docutils literal notranslate"><span class="pre">__repr__</span></code></a></li>
@@ -199,8 +200,8 @@
 <p><strong>B</strong>. discovers neighboring nodes (lines 9-13)</p>
 <p><strong>C</strong>. proceeds by visiting them and continuing this process until there are no new nodes left to discover and visit (line 5)</p>
 </div>
-<div class="section" id="looking-at-an-implementation">
-<span id="implementation"></span><h1>Looking at an Implementation<a class="headerlink" href="#looking-at-an-implementation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="looking-at-an-implementation-of-bfs-against-an-adjacency-list">
+<span id="implementation"></span><h1>Looking at an Implementation of BFS against an Adjacency List<a class="headerlink" href="#looking-at-an-implementation-of-bfs-against-an-adjacency-list" title="Permalink to this headline">¶</a></h1>
 <p>Here’s some sample code to compare it to the pseudocode above!</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -250,13 +251,34 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<div class="section" id="anatomy-of-a-room">
+<h1>Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code><a class="headerlink" href="#anatomy-of-a-room" title="Permalink to this headline">¶</a></h1>
+<p>What’s in an instance of a <code class="docutils literal notranslate"><span class="pre">Room</span></code> object, anyway?</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.coords</span></code>: Its address as a tuple (<code class="docutils literal notranslate"><span class="pre">row</span></code>, <code class="docutils literal notranslate"><span class="pre">col</span></code>).</p></li>
+<li><p>A list of the coordinates of neighbors to the immediate North, East, West, or South.</p></li>
+</ul>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">.prev</span></code> during traversal lets us back-track top find the shortest path from the Room we are seeking back to the start.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.prev</span></code>: Reference to prev <code class="docutils literal notranslate"><span class="pre">Room</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.traversal_mode</span></code>: This flag controls the string representation of a <code class="docutils literal notranslate"><span class="pre">Room</span></code>. Sounds weird, but we want to know different aspects of the Room at different times in different contexts. This unorthodox approach lets us change how a <code class="docutils literal notranslate"><span class="pre">Room</span></code> is <code class="docutils literal notranslate"><span class="pre">print()</span></code>-ed. This will be of use later.</p></li>
+</ul>
+<p>When a <code class="docutils literal notranslate"><span class="pre">Maze</span></code> is instantiated, the <code class="docutils literal notranslate"><span class="pre">Rooms</span></code> that it is composed of have <code class="docutils literal notranslate"><span class="pre">.traversal_mode</span></code> set to <code class="docutils literal notranslate"><span class="pre">False</span></code>. It is only when we start looking for paths that this flag is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>There are also some derived attributes. The existence of a derived attribute on this class does <em>not</em> imply its usage or existence outside the scope of the object in its lifetime. That’s right, there may be attributes that simply don’t have a purpose yet.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.row</span></code>: The row part of the coord.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.col</span></code>: The col part of the coord.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.is_intersection</span></code>: Does this room have more than 2 neighbors?</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.is_dead_end</span></code>: Is there only one way in / out of this room?</p></li>
+</ul>
+</div>
 <div class="section" id="pathfinding">
 <h1>Pathfinding<a class="headerlink" href="#pathfinding" title="Permalink to this headline">¶</a></h1>
-<p>This <code class="docutils literal notranslate"><span class="pre">bfs</span></code> function returns a reference to the found room (if, you know, it’s found).</p>
+<p>This <code class="docutils literal notranslate"><span class="pre">bfs()</span></code> function returns a reference to the found room (if, you know, it’s found).</p>
 <p>How can we use this to find a path back to the start?</p>
 <div class="section" id="room-prev">
 <h2><code class="docutils literal notranslate"><span class="pre">Room.prev</span></code><a class="headerlink" href="#room-prev" title="Permalink to this headline">¶</a></h2>
-<p>Take notice of line 12 of the code sample in <a class="reference internal" href="#bfs-review"><span class="std std-ref">A Review of BFS</span></a>. The same functionality appears on line 21 of <a class="reference internal" href="#implementation"><span class="std std-ref">Looking at an Implementation</span></a>.</p>
+<p>Take notice of line 12 of the code sample in <a class="reference internal" href="#bfs-review"><span class="std std-ref">A Review of BFS</span></a>. The same functionality appears on line 21 of <a class="reference internal" href="#implementation"><span class="std std-ref">Looking at an Implementation of BFS against an Adjacency List</span></a>.</p>
 <p>Prior to adding new room to the <code class="docutils literal notranslate"><span class="pre">to_visit</span></code> queue, we note down that <code class="docutils literal notranslate"><span class="pre">Room</span></code> coordinates we’re in now. This way, we can walk back up the <code class="docutils literal notranslate"><span class="pre">Room.prev</span></code> recursively until we get to a <code class="docutils literal notranslate"><span class="pre">Room</span></code> where <code class="docutils literal notranslate"><span class="pre">.prev</span> <span class="pre">is</span> <span class="pre">None</span></code>.</p>
 </div>
 <div class="section" id="a-brief-diversion-printing-a-linked-list-with-recursive-repr">
