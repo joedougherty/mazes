@@ -256,7 +256,7 @@
 <p>What’s in an instance of a <code class="docutils literal notranslate"><span class="pre">Room</span></code> object, anyway?</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">.coords</span></code>: Its address as a tuple (<code class="docutils literal notranslate"><span class="pre">row</span></code>, <code class="docutils literal notranslate"><span class="pre">col</span></code>).</p></li>
-<li><p>A list of the coordinates of neighbors to the immediate North, East, West, or South.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.neighbors</span></code>: A list of the <em>coordinates</em> of neighbors to the immediate North, East, West, or South. (No diagonal travel).</p></li>
 </ul>
 <p>Setting <code class="docutils literal notranslate"><span class="pre">.prev</span></code> during traversal lets us back-track top find the shortest path from the Room we are seeking back to the start.</p>
 <ul class="simple">

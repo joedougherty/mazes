@@ -80,7 +80,7 @@ Anatomy of a ``Room``
 What's in an instance of a ``Room`` object, anyway?
 
 + ``.coords``: Its address as a tuple (``row``, ``col``).
-+ A list of the coordinates of neighbors to the immediate North, East, West, or South.
++ ``.neighbors``: A list of the *coordinates* of neighbors to the immediate North, East, West, or South. (No diagonal travel).
 
 
 Setting ``.prev`` during traversal lets us back-track top find the shortest path from the Room we are seeking back to the start.
