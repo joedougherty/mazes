@@ -92,7 +92,7 @@ This may sound strange. Why would we want that?
 
 It can be helpful to know different aspects of the ``Room`` at different times, in different contexts. This somewhat unorthodox approach lets us change how a ``Room`` is ``print()``-ed. This will be of use later.
 
-When a ``Maze`` is instantiated, the ``Rooms`` that it is composed of have ``.traversal_mode`` set to ``False``. It is only when we start looking for paths that this flag is set to ``True``.
+When a ``Maze`` is instantiated, the ``Room`` instances that it is composed of will have ``.traversal_mode`` set to ``False``. It is only when we start looking for paths that this flag is set to ``True``.
 
 There are also some derived attributes. The existence of a derived attribute on this class does *not* imply its usage or existence outside the scope of the object in its lifetime. That's right, there may be attributes that simply don't have a purpose yet.
 
