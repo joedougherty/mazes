@@ -86,7 +86,9 @@ What's in an instance of a ``Room`` object, anyway?
 Setting ``.prev`` during traversal lets us back-track top find the shortest path from the Room we are seeking back to the start.
 
 + ``.prev``: Reference to prev ``Room``
-+ ``.traversal_mode``: This flag controls the string representation of a ``Room``. Sounds weird, but we want to know different aspects of the Room at different times in different contexts. This unorthodox approach lets us change how a ``Room`` is ``print()``-ed. This will be of use later.
++ ``.traversal_mode``: This flag controls the string representation of a ``Room`` instance. 
+
+This may sounds strange. Why would we want tha? It can be helpful to know different aspects of the ``Room`` at different times, in different contexts. This somewhat unorthodox approach lets us change how a ``Room`` is ``print()``-ed. This will be of use later.
 
 When a ``Maze`` is instantiated, the ``Rooms`` that it is composed of have ``.traversal_mode`` set to ``False``. It is only when we start looking for paths that this flag is set to ``True``.
 
@@ -117,6 +119,39 @@ How can we use this to find a path back to the start?
 Take notice of line 12 of the code sample in :ref:`bfs-review`. The same functionality appears on line 21 of :ref:`implementation`. 
 
 Prior to adding new room to the ``to_visit`` queue, we note down that ``Room`` coordinates we're in now. This way, we can walk back up the ``Room.prev`` recursively until we get to a ``Room`` where ``.prev is None``.
+
+
+
++++++++++++++++++++
+``shortest_path()``
++++++++++++++++++++
+
+
+Passing the final ``Room`` to shortest path will the shortest way back to the start. It traverses the implicit linked list, pushing a reference to each item onto the return list. 
+
+
+.. code-block:: python
+
+    def shortest_path(adjlist, start_coords, goal_coords, root_to_leaf=True):
+        path = []
+
+        found = bfs(adjlist, start_coords, goal_coords)
+
+        if not found:
+            print("No path found!")
+            return False
+
+        path.append(found.coords)
+
+        while found.prev:
+            found = found.prev
+            path.append(found.coords)
+
+        if root_to_leaf:
+            path.reverse()
+
+        return path
+
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

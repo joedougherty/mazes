@@ -91,6 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="#anatomy-of-a-room">Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="#pathfinding">Pathfinding</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#room-prev"><code class="docutils literal notranslate"><span class="pre">Room.prev</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shortest-path"><code class="docutils literal notranslate"><span class="pre">shortest_path()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#a-brief-diversion-printing-a-linked-list-with-recursive-repr">A Brief Diversion: printing a linked list with recursive <code class="docutils literal notranslate"><span class="pre">__repr__</span></code></a></li>
 </ul>
 </li>
@@ -261,8 +262,9 @@
 <p>Setting <code class="docutils literal notranslate"><span class="pre">.prev</span></code> during traversal lets us back-track top find the shortest path from the Room we are seeking back to the start.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">.prev</span></code>: Reference to prev <code class="docutils literal notranslate"><span class="pre">Room</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.traversal_mode</span></code>: This flag controls the string representation of a <code class="docutils literal notranslate"><span class="pre">Room</span></code>. Sounds weird, but we want to know different aspects of the Room at different times in different contexts. This unorthodox approach lets us change how a <code class="docutils literal notranslate"><span class="pre">Room</span></code> is <code class="docutils literal notranslate"><span class="pre">print()</span></code>-ed. This will be of use later.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.traversal_mode</span></code>: This flag controls the string representation of a <code class="docutils literal notranslate"><span class="pre">Room</span></code> instance.</p></li>
 </ul>
+<p>This may sounds strange. Why would we want tha? It can be helpful to know different aspects of the <code class="docutils literal notranslate"><span class="pre">Room</span></code> at different times, in different contexts. This somewhat unorthodox approach lets us change how a <code class="docutils literal notranslate"><span class="pre">Room</span></code> is <code class="docutils literal notranslate"><span class="pre">print()</span></code>-ed. This will be of use later.</p>
 <p>When a <code class="docutils literal notranslate"><span class="pre">Maze</span></code> is instantiated, the <code class="docutils literal notranslate"><span class="pre">Rooms</span></code> that it is composed of have <code class="docutils literal notranslate"><span class="pre">.traversal_mode</span></code> set to <code class="docutils literal notranslate"><span class="pre">False</span></code>. It is only when we start looking for paths that this flag is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 <p>There are also some derived attributes. The existence of a derived attribute on this class does <em>not</em> imply its usage or existence outside the scope of the object in its lifetime. That’s right, there may be attributes that simply don’t have a purpose yet.</p>
 <ul class="simple">
@@ -280,6 +282,31 @@
 <h2><code class="docutils literal notranslate"><span class="pre">Room.prev</span></code><a class="headerlink" href="#room-prev" title="Permalink to this headline">¶</a></h2>
 <p>Take notice of line 12 of the code sample in <a class="reference internal" href="#bfs-review"><span class="std std-ref">A Review of BFS</span></a>. The same functionality appears on line 21 of <a class="reference internal" href="#implementation"><span class="std std-ref">Looking at an Implementation of BFS against an Adjacency List</span></a>.</p>
 <p>Prior to adding new room to the <code class="docutils literal notranslate"><span class="pre">to_visit</span></code> queue, we note down that <code class="docutils literal notranslate"><span class="pre">Room</span></code> coordinates we’re in now. This way, we can walk back up the <code class="docutils literal notranslate"><span class="pre">Room.prev</span></code> recursively until we get to a <code class="docutils literal notranslate"><span class="pre">Room</span></code> where <code class="docutils literal notranslate"><span class="pre">.prev</span> <span class="pre">is</span> <span class="pre">None</span></code>.</p>
+</div>
+<div class="section" id="shortest-path">
+<h2><code class="docutils literal notranslate"><span class="pre">shortest_path()</span></code><a class="headerlink" href="#shortest-path" title="Permalink to this headline">¶</a></h2>
+<p>Passing the final <code class="docutils literal notranslate"><span class="pre">Room</span></code> to shortest path will the shortest way back to the start. It traverses the implicit linked list, pushing a reference to each item onto the return list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="n">adjlist</span><span class="p">,</span> <span class="n">start_coords</span><span class="p">,</span> <span class="n">goal_coords</span><span class="p">,</span> <span class="n">root_to_leaf</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">found</span> <span class="o">=</span> <span class="n">bfs</span><span class="p">(</span><span class="n">adjlist</span><span class="p">,</span> <span class="n">start_coords</span><span class="p">,</span> <span class="n">goal_coords</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No path found!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">found</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">found</span><span class="o">.</span><span class="n">prev</span><span class="p">:</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="n">found</span><span class="o">.</span><span class="n">prev</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">found</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">root_to_leaf</span><span class="p">:</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">path</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="a-brief-diversion-printing-a-linked-list-with-recursive-repr">
 <h2>A Brief Diversion: printing a linked list with recursive <code class="docutils literal notranslate"><span class="pre">__repr__</span></code><a class="headerlink" href="#a-brief-diversion-printing-a-linked-list-with-recursive-repr" title="Permalink to this headline">¶</a></h2>
