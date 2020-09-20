@@ -88,7 +88,9 @@ Setting ``.prev`` during traversal lets us back-track top find the shortest path
 + ``.prev``: Reference to prev ``Room``
 + ``.traversal_mode``: This flag controls the string representation of a ``Room`` instance. 
 
-This may sounds strange. Why would we want tha? It can be helpful to know different aspects of the ``Room`` at different times, in different contexts. This somewhat unorthodox approach lets us change how a ``Room`` is ``print()``-ed. This will be of use later.
+This may sound strange. Why would we want that? 
+
+It can be helpful to know different aspects of the ``Room`` at different times, in different contexts. This somewhat unorthodox approach lets us change how a ``Room`` is ``print()``-ed. This will be of use later.
 
 When a ``Maze`` is instantiated, the ``Rooms`` that it is composed of have ``.traversal_mode`` set to ``False``. It is only when we start looking for paths that this flag is set to ``True``.
 
