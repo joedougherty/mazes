@@ -225,7 +225,7 @@ Some minor reformatting of the ``bfs()`` function helps to reveal significant si
                                                                 |      
         while Q is not empty do                                 |      while to_visit:
             v := Q.dequeue()                                    |          room = to_visit.popleft()
-                                                                |		   visited.add(room)
+                                                                |          visited.add(room)
                                                                 |
             if v is the goal then                               |          if room.coords == goal.coords:
                 return v                                        |              return room 
