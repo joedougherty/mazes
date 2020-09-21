@@ -103,7 +103,6 @@
 <li class="toctree-l1"><a class="reference internal" href="#pathfinding">Pathfinding</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#room-prev"><code class="docutils literal notranslate"><span class="pre">Room.prev</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shortest-path"><code class="docutils literal notranslate"><span class="pre">shortest_path()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#a-brief-diversion-printing-a-linked-list-with-recursive-repr">A Brief Diversion: printing a linked list with recursive <code class="docutils literal notranslate"><span class="pre">__repr__</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#the-maze-class">The <code class="docutils literal notranslate"><span class="pre">Maze</span></code> class</a><ul>
@@ -117,6 +116,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">.shortest_path()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#an-aside-printing-a-linked-list-with-recursive-repr">An Aside: printing a linked list with recursive <code class="docutils literal notranslate"><span class="pre">__repr__</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#resources">Resources</a></li>
@@ -270,44 +270,6 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="a-brief-diversion-printing-a-linked-list-with-recursive-repr">
-<h2>A Brief Diversion: printing a linked list with recursive <code class="docutils literal notranslate"><span class="pre">__repr__</span></code><a class="headerlink" href="#a-brief-diversion-printing-a-linked-list-with-recursive-repr" title="Permalink to this headline">¶</a></h2>
-<p>Here is a simplified example to demonstrate the principle.</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span>   <span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
-       <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-           <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
-           <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
-
-       <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-           <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
-               <span class="c1"># Here&#39;s the (implict) recursive call!</span>
-               <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="si">}</span><span class="s1"> &lt;- </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
-           <span class="k">else</span><span class="p">:</span>
-               <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
-</pre></div>
-</td></tr></table></div>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>   <span class="n">zero</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-   <span class="n">one</span>  <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">zero</span><span class="p">)</span>
-   <span class="n">two</span>  <span class="o">=</span> <span class="n">node</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">one</span><span class="p">)</span>
-
-   <span class="nb">print</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="c1"># &#39;&#39;&#39;0 &lt;- 1 &lt;- 2&#39;&#39;&#39;</span>
-</pre></div>
-</td></tr></table></div>
-</div>
 </div>
 <div class="section" id="the-maze-class">
 <h1>The <code class="docutils literal notranslate"><span class="pre">Maze</span></code> class<a class="headerlink" href="#the-maze-class" title="Permalink to this headline">¶</a></h1>
@@ -343,7 +305,7 @@
 <div class="section" id="searching-and-pathfinding">
 <h2>Searching and Pathfinding<a class="headerlink" href="#searching-and-pathfinding" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="bfs">
-<h3><code class="docutils literal notranslate"><span class="pre">.bfs()</span></code><a class="headerlink" href="#bfs" title="Permalink to this headline">¶</a></h3>
+<span id="rec-print-example"></span><h3><code class="docutils literal notranslate"><span class="pre">.bfs()</span></code><a class="headerlink" href="#bfs" title="Permalink to this headline">¶</a></h3>
 <p>Uses breadth-first search to determine whether or not there is a path between a given start room <code class="docutils literal notranslate"><span class="pre">(start_row,</span> <span class="pre">start_col)</span></code> and a given goal room <code class="docutils literal notranslate"><span class="pre">(goal_row,</span> <span class="pre">goal_col)</span></code>.</p>
 <p>If a path exists, it returns a reference to the <code class="docutils literal notranslate"><span class="pre">Room</span></code> instance at <code class="docutils literal notranslate"><span class="pre">(goal_row,</span> <span class="pre">goal_col)</span></code>.</p>
 <p>Otherwise, this returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
@@ -385,6 +347,46 @@ if goal:
 <p>If no path is found, returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <p>This method makes concrete what is implicit above in <code class="docutils literal notranslate"><span class="pre">.bfs()</span></code>.</p>
 </div>
+</div>
+<div class="section" id="an-aside-printing-a-linked-list-with-recursive-repr">
+<h2>An Aside: printing a linked list with recursive <code class="docutils literal notranslate"><span class="pre">__repr__</span></code><a class="headerlink" href="#an-aside-printing-a-linked-list-with-recursive-repr" title="Permalink to this headline">¶</a></h2>
+<p>You may have noticed in <a class="reference internal" href="#rec-print-example"><span class="std std-ref">.bfs()</span></a> that we were able to print the full path back to the start room using only a reference to the end <code class="docutils literal notranslate"><span class="pre">Room</span></code>. What’s going on here?</p>
+<p>Here is a simplified example to demonstrate the principle.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span>   <span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+       <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+
+       <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+           <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
+               <span class="c1"># Here&#39;s the (implict) recursive call!</span>
+               <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="si">}</span><span class="s1"> &lt;- </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
+           <span class="k">else</span><span class="p">:</span>
+               <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>   <span class="n">zero</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+   <span class="n">one</span>  <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">zero</span><span class="p">)</span>
+   <span class="n">two</span>  <span class="o">=</span> <span class="n">node</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">one</span><span class="p">)</span>
+
+   <span class="nb">print</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="c1"># &#39;&#39;&#39;0 &lt;- 1 &lt;- 2&#39;&#39;&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>We can use implicit recursivse calls to <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> to print the whole path.</p>
 </div>
 </div>
 <div class="section" id="resources">

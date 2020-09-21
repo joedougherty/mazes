@@ -117,39 +117,6 @@ Passing the final ``Room`` to shortest path will the shortest way back to the st
 
 
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-A Brief Diversion: printing a linked list with recursive ``__repr__`` 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Here is a simplified example to demonstrate the principle. 
-
-.. code-block:: python
- :linenos:
-
-    class Node:
-        def __init__(self, val, parent=None):
-            self.val = val 
-            self.parent = parent
-
-        def __repr__(self):
-            if self.parent:
-                # Here's the (implict) recursive call!
-                return f'''{self.parent} <- {self.val}'''
-            else:
-                return f'''{self.val}'''
-
-
-
-.. code-block:: python
- :linenos:
-
-    zero = Node(0, parent=None)
-    one  = Node(1, parent=zero)
-    two  = node(2, parent=one)
-
-    print(two) # '''0 <- 1 <- 2'''
-
-
 -------------------
 The ``Maze`` class
 -------------------
@@ -202,6 +169,8 @@ Visualization
 +++++++++++++++++++++++++
 Searching and Pathfinding
 +++++++++++++++++++++++++
+
+.. _rec-print-example:
 
 ``.bfs()``
 ------------
@@ -257,6 +226,44 @@ A list of ``Room`` coordinates that describe the path from ``(start_row, start_c
 If no path is found, returns ``False``.
 
 This method makes concrete what is implicit above in ``.bfs()``.
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+An Aside: printing a linked list with recursive ``__repr__`` 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+You may have noticed in :ref:`rec-print-example` that we were able to print the full path back to the start room using only a reference to the end ``Room``. What's going on here?
+
+Here is a simplified example to demonstrate the principle. 
+
+.. code-block:: python
+ :linenos:
+
+    class Node:
+        def __init__(self, val, parent=None):
+            self.val = val 
+            self.parent = parent
+
+        def __repr__(self):
+            if self.parent:
+                # Here's the (implict) recursive call!
+                return f'''{self.parent} <- {self.val}'''
+            else:
+                return f'''{self.val}'''
+
+
+
+.. code-block:: python
+ :linenos:
+
+    zero = Node(0, parent=None)
+    one  = Node(1, parent=zero)
+    two  = node(2, parent=one)
+
+    print(two) # '''0 <- 1 <- 2'''
+
+
+We can use implicit recursivse calls to ``__repr__`` to print the whole path.
 
 ---------
 Resources
