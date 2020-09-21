@@ -74,7 +74,7 @@ class Maze:
     :param room_width: How wide the rooms are (function of max # of digits it takes to represent highest numbered node)
     :type  room_width: int
     """
-    def __init__(self, input_maze, path, wall, room_width=2):
+    def __init__(self, input_maze, path=' ', wall='#', room_width=2):
         if isinstance(input_maze, str):
             self.maze_as_matrix = str2nested_list(input_maze)
         elif isistance(maze_as_matrix, list):
