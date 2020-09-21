@@ -271,7 +271,7 @@ Visualization
     (02, 01)        (02, 03)
 
 
-(This method helps show the relationships between the rooms using coords as an identifier.)
+(This method helps show the position of rooms using coords as an identifier.)
 
 
 ---------
