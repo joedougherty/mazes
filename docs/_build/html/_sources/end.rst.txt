@@ -305,6 +305,26 @@ Visualization
 (This method helps show the position of rooms using coords as an identifier.)
 
 
++++++++++++++++++++++++++
+Searching and Pathfinding
++++++++++++++++++++++++++
+
+``.bfs()```
+------------
+
+Uses breadth-first search to determine whether or not there is a path between a given start room (``(start_row, start_col)``) and a given goal room (``(goal_row, goal_col)``).
+
+If a path exists, it returns a reference to the ``Room`` instance at ``(goal_row, goal_col)``. 
+
+Otherwise, this returns ``False``.
+
+
+``.shortest_path()``
+----------------------
+
+A list of Room coordinates that describe the path from ``(start_row, start_col)`` to ``(goal_row, goal_col)`` (including both).
+
+
 ---------
 Resources
 ---------

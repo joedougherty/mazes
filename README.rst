@@ -13,6 +13,6 @@ Full documentation at: `<https://mazes.readthedocs.io/>`_
 Code
 --------
 
-Code lives in the ``src`` directory.
+Code lives under ``src/`` directory.
 
 
