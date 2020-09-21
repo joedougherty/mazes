@@ -73,6 +73,37 @@ Here's some sample code to compare it to the pseudocode above!
         return False
 
 
+---------------------------------------------------
+Side-by-Side comparison of Pseudocode to ``bfs()``
+---------------------------------------------------
+
+Some minor reformatting of the ``bfs()`` function helps to reveal significant similarity.
+
+
+.. code-block:: text
+
+    procedure BFS(G, root) is                                   |  def bfs(adjlist, start_coords, goal_coords):
+        let Q be a queue                                        |      to_visit, visited = deque(), set()
+        label root as discovered                                |      root = adjlist[start_coords]
+        Q.enqueue(root)                                         |      to_visit.append(root)
+                                                                |      
+                                                                |      
+        while Q is not empty do                                 |      while to_visit:
+            v := Q.dequeue()                                    |          room = to_visit.popleft()
+                                                                |		   visited.add(room)
+                                                                |
+            if v is the goal then                               |          if room.coords == goal.coords:
+                return v                                        |              return room 
+                                                                | 
+            for all edges from v to w in G.adjacentEdges(v) do  |          for coords in room.neighbors: 
+                                                                |              next_room = adjlist[coords]
+                if w is not labeled as discovered then          |              if next_room not in visited:  
+                    label w as discovered                       |                  next_room.prev = room
+                    w.parent := v                               |                  to_visit.append(next_room) 
+                    Q.enqueue(w)                                |
+
+
+
 -----------------------
 Anatomy of a ``Room``
 -----------------------

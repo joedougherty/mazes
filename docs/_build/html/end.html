@@ -88,6 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="middle.html">From an ASCII Maze to an Adjacency List</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">A Review of Breadth-first Search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#looking-at-an-implementation-of-bfs-against-an-adjacency-list">Looking at an Implementation of BFS against an Adjacency List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#side-by-side-comparison-of-pseudocode-to-bfs">Side-by-Side comparison of Pseudocode to <code class="docutils literal notranslate"><span class="pre">bfs()</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="#anatomy-of-a-room">Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="#pathfinding">Pathfinding</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#room-prev"><code class="docutils literal notranslate"><span class="pre">Room.prev</span></code></a></li>
@@ -254,6 +255,31 @@
      <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<div class="section" id="side-by-side-comparison-of-pseudocode-to-bfs">
+<h1>Side-by-Side comparison of Pseudocode to <code class="docutils literal notranslate"><span class="pre">bfs()</span></code><a class="headerlink" href="#side-by-side-comparison-of-pseudocode-to-bfs" title="Permalink to this headline">¶</a></h1>
+<p>Some minor reformatting of the <code class="docutils literal notranslate"><span class="pre">bfs()</span></code> function helps to reveal significant similarity.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>procedure BFS(G, root) is                                   |  def bfs(adjlist, start_coords, goal_coords):
+    let Q be a queue                                        |      to_visit, visited = deque(), set()
+    label root as discovered                                |      root = adjlist[start_coords]
+    Q.enqueue(root)                                         |      to_visit.append(root)
+                                                            |
+                                                            |
+    while Q is not empty do                                 |      while to_visit:
+        v := Q.dequeue()                                    |          room = to_visit.popleft()
+                                                            |                  visited.add(room)
+                                                            |
+        if v is the goal then                               |          if room.coords == goal.coords:
+            return v                                        |              return room
+                                                            |
+        for all edges from v to w in G.adjacentEdges(v) do  |          for coords in room.neighbors:
+                                                            |              next_room = adjlist[coords]
+            if w is not labeled as discovered then          |              if next_room not in visited:
+                label w as discovered                       |                  next_room.prev = room
+                w.parent := v                               |                  to_visit.append(next_room)
+                Q.enqueue(w)                                |
+</pre></div>
+</div>
 </div>
 <div class="section" id="anatomy-of-a-room">
 <h1>Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code><a class="headerlink" href="#anatomy-of-a-room" title="Permalink to this headline">¶</a></h1>
