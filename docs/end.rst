@@ -319,11 +319,50 @@ If a path exists, it returns a reference to the ``Room`` instance at ``(goal_row
 Otherwise, this returns ``False``.
 
 
+.. code-block:: text
+    
+    tiny = '''
+    ######
+    #    #
+    # # ##
+    ######
+    '''.strip()
+
+
+    tinymaze = Maze(tiny)
+
+    '''
+    Try to keep something like this in mind...
+
+    ######
+    #ABCD#
+    #E#F##
+    ######
+    ''''
+
+    # Look for a path from "A" to "F"
+    goal = tinymaze.bfs((1,1),(2,3))
+
+    if goal:
+        print(goal)
+        
+    # ``goal`` now has this nice str rep which shows us the path back...
+
+    """(1, 1) -> (1, 2) -> (1, 3) -> (2, 3)"""
+
+
+Yes, we can get there from here!
+
+
+
 ``.shortest_path()``
 ----------------------
 
-A list of Room coordinates that describe the path from ``(start_row, start_col)`` to ``(goal_row, goal_col)`` (including both).
+A list of ``Room`` coordinates that describe the path from ``(start_row, start_col)`` to ``(goal_row, goal_col)`` (including both).
 
+If no path is found, returns ``False``.
+
+This method makes concrete what is implicit above in ``.bfs()``.
 
 ---------
 Resources

@@ -448,10 +448,43 @@
 <p>Uses breadth-first search to determine whether or not there is a path between a given start room <code class="docutils literal notranslate"><span class="pre">(start_row,</span> <span class="pre">start_col)</span></code> and a given goal room <code class="docutils literal notranslate"><span class="pre">(goal_row,</span> <span class="pre">goal_col)</span></code>.</p>
 <p>If a path exists, it returns a reference to the <code class="docutils literal notranslate"><span class="pre">Room</span></code> instance at <code class="docutils literal notranslate"><span class="pre">(goal_row,</span> <span class="pre">goal_col)</span></code>.</p>
 <p>Otherwise, this returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tiny = &#39;&#39;&#39;
+######
+#    #
+# # ##
+######
+&#39;&#39;&#39;.strip()
+
+
+tinymaze = Maze(tiny)
+
+&#39;&#39;&#39;
+Try to keep something like this in mind...
+
+######
+#ABCD#
+#E#F##
+######
+&#39;&#39;&#39;&#39;
+
+# Look for a path from &quot;A&quot; to &quot;F&quot;
+goal = tinymaze.bfs((1,1),(2,3))
+
+if goal:
+    print(goal)
+
+# ``goal`` now has this nice str rep which shows us the path back...
+
+&quot;&quot;&quot;(1, 1) -&gt; (1, 2) -&gt; (1, 3) -&gt; (2, 3)&quot;&quot;&quot;
+</pre></div>
+</div>
+<p>Yes, we can get there from here!</p>
 </div>
 <div class="section" id="id1">
 <h3><code class="docutils literal notranslate"><span class="pre">.shortest_path()</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p>A list of Room coordinates that describe the path from <code class="docutils literal notranslate"><span class="pre">(start_row,</span> <span class="pre">start_col)</span></code> to <code class="docutils literal notranslate"><span class="pre">(goal_row,</span> <span class="pre">goal_col)</span></code> (including both).</p>
+<p>A list of <code class="docutils literal notranslate"><span class="pre">Room</span></code> coordinates that describe the path from <code class="docutils literal notranslate"><span class="pre">(start_row,</span> <span class="pre">start_col)</span></code> to <code class="docutils literal notranslate"><span class="pre">(goal_row,</span> <span class="pre">goal_col)</span></code> (including both).</p>
+<p>If no path is found, returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>This method makes concrete what is implicit above in <code class="docutils literal notranslate"><span class="pre">.bfs()</span></code>.</p>
 </div>
 </div>
 </div>
