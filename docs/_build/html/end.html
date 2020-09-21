@@ -386,7 +386,10 @@ if goal:
    <span class="nb">print</span><span class="p">(</span><span class="n">two</span><span class="p">)</span> <span class="c1"># &#39;&#39;&#39;0 &lt;- 1 &lt;- 2&#39;&#39;&#39;</span>
 </pre></div>
 </td></tr></table></div>
-<p>We can use implicit recursivse calls to <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> to print the whole path.</p>
+<p>The <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__repr__">__repr__ magic method</a> controls the “official” string representation of an object.</p>
+<p>We can use implicit recursive calls to <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> to print the whole path.</p>
+<p>When we <code class="docutils literal notranslate"><span class="pre">print()</span></code>  a <code class="docutils literal notranslate"><span class="pre">Node</span></code> who has a <code class="docutils literal notranslate"><span class="pre">parent</span></code>, we print the parent instance as well.</p>
+<p>This pushes onto the stack until we get to the root <code class="docutils literal notranslate"><span class="pre">Node</span></code>, at which point the stack unwinds and prints the path back.</p>
 </div>
 </div>
 <div class="section" id="resources">
@@ -396,6 +399,7 @@ if goal:
 <p><a class="reference external" href="https://py.checkio.org/en/mission/open-labyrinth/share/574bd1ded68c9705c5d6f07c6206be12/">https://py.checkio.org/en/mission/open-labyrinth/share/574bd1ded68c9705c5d6f07c6206be12/</a></p>
 <p><a class="reference external" href="http://bryukh.com/labyrinth-algorithms/">http://bryukh.com/labyrinth-algorithms/</a></p>
 <p><a class="reference external" href="https://stackoverflow.com/questions/1984162/purpose-of-pythons-repro">https://stackoverflow.com/questions/1984162/purpose-of-pythons-repro</a></p>
+<p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__repr__">https://docs.python.org/3/reference/datamodel.html#object.__repr__</a></p>
 <p>Breadth-first search. (2020). Retrieved September 19, from <a class="reference external" href="https://en.wikipedia.org/wiki/Breadth-first_search">https://en.wikipedia.org/wiki/Breadth-first_search</a>.</p>
 <p>Skiena, S. (2008) <em>The Algorithm Design Manual</em> IBSN: 9781848000698</p>
 </div>

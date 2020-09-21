@@ -263,7 +263,15 @@ Here is a simplified example to demonstrate the principle.
     print(two) # '''0 <- 1 <- 2'''
 
 
-We can use implicit recursivse calls to ``__repr__`` to print the whole path.
+
+The `__repr__ magic method <https://docs.python.org/3/reference/datamodel.html#object.__repr__>`_ controls the "official" string representation of an object. 
+
+We can use implicit recursive calls to ``__repr__`` to print the whole path.
+
+
+When we ``print()``  a ``Node`` who has a ``parent``, we print the parent instance as well. 
+
+This pushes onto the stack until we get to the root ``Node``, at which point the stack unwinds and prints the path back.
 
 ---------
 Resources
@@ -284,6 +292,8 @@ http://bryukh.com/labyrinth-algorithms/
 
 https://stackoverflow.com/questions/1984162/purpose-of-pythons-repro
 
+
+https://docs.python.org/3/reference/datamodel.html#object.__repr__
 
 Breadth-first search. (2020). Retrieved September 19, from https://en.wikipedia.org/wiki/Breadth-first_search. 
 
