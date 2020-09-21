@@ -64,8 +64,8 @@ Taking a cue from `this article <http://bryukh.com/labyrinth-algorithms/>`_, the
 
 Here's the spec:
 
-+ ``key`` -> coordinates of the room in the maze, expressed as a tuple (``row``, ``col``).
-+ ``value`` -> the ``Room`` instance of the current room. Each ``Room`` instance has a ``.neighbors`` attribute: a list of coordinates of neighboring cells that can be reached from this room.
++ **key** -> coordinates of the room in the maze, expressed as a tuple ``(row, col)``.
++ **value** -> the ``Room`` instance of the current room. Each ``Room`` instance has a ``.neighbors`` attribute: a list of coordinates of neighboring cells that can be reached from this room.
 
 
 .. code-block:: python
@@ -115,7 +115,7 @@ Use the coords of the Room in question as the key.
 
 If that space has a room, it will provide the ``Room`` object, which will contain ``.neighbors``. 
 
-Here is the resulting Adjacency List for the ``tiny`` labyrinth (with some formatting):
+Here is the resulting Adjacency List for the ``tiny`` labyrinth (with some additonal formatting for readability):
 
 .. code-block:: python
 

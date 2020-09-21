@@ -1,8 +1,8 @@
 .. _bfs-review:
 
------------------
-A Review of BFS
------------------
+---------------------------------
+A Review of Breadth-first Search
+---------------------------------
 
 `Wikipedia Pseudocode <https://en.wikipedia.org/wiki/Breadth-first_search#Pseudocode>`_:
 
@@ -229,11 +229,25 @@ Here is a simplified example to demonstrate the principle.
 The ``Maze`` class
 -------------------
 
+We have primarily looked at how we can approach this problem with a few functions.
+
+There is also a full ``Maze`` class that encapsulates this functionality.
+
+Let's look at a few select methods:
 
 
-++++++++++++++++
+
+.. NOTE::
+    The implementation of the ``Maze`` class can be found in ``src/classymaze.py``.
+
+
+++++++++++++++
+Visualization
+++++++++++++++
+
+
 ``.as_ascii()``
-++++++++++++++++
+----------------
 
 
 .. code-block:: text
@@ -247,9 +261,8 @@ The ``Maze`` class
 
 
 
-+++++++++++++++++++++
 ``.show_vertices()``
-+++++++++++++++++++++
+-----------------------
 
 .. code-block:: text
 
@@ -258,7 +271,8 @@ The ``Maze`` class
     (02, 01)        (02, 03)
 
 
-Shows the relationships between the rooms, using coords as an identifier.
+(This method helps show the relationships between the rooms using coords as an identifier.)
+
 
 ---------
 Resources

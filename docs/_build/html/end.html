@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>A Review of BFS &mdash; The Minoatur&#39;s Mini-Tour 0.1 documentation</title>
+  <title>A Review of Breadth-first Search &mdash; The Minoatur&#39;s Mini-Tour 0.1 documentation</title>
   
 
   
@@ -86,7 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="begin.html">Defining Our Terms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="begin.html#lil-labyrinth-methods-of-maze-representation">Lil’ Labyrinth: Methods of Maze Representation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="middle.html">From an ASCII Maze to an Adjacency List</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">A Review of BFS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A Review of Breadth-first Search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#looking-at-an-implementation-of-bfs-against-an-adjacency-list">Looking at an Implementation of BFS against an Adjacency List</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#anatomy-of-a-room">Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="#pathfinding">Pathfinding</a><ul>
@@ -96,8 +96,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#the-maze-class">The <code class="docutils literal notranslate"><span class="pre">Maze</span></code> class</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#as-ascii"><code class="docutils literal notranslate"><span class="pre">.as_ascii()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#show-vertices"><code class="docutils literal notranslate"><span class="pre">.show_vertices()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualization">Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#as-ascii"><code class="docutils literal notranslate"><span class="pre">.as_ascii()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#show-vertices"><code class="docutils literal notranslate"><span class="pre">.show_vertices()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#resources">Resources</a></li>
@@ -147,7 +150,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>A Review of BFS</li>
+      <li>A Review of Breadth-first Search</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -166,8 +169,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="a-review-of-bfs">
-<span id="bfs-review"></span><h1>A Review of BFS<a class="headerlink" href="#a-review-of-bfs" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="a-review-of-breadth-first-search">
+<span id="bfs-review"></span><h1>A Review of Breadth-first Search<a class="headerlink" href="#a-review-of-breadth-first-search" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Breadth-first_search#Pseudocode">Wikipedia Pseudocode</a>:</p>
 <div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -309,7 +312,7 @@
 <p>How can we use this to find a path back to the start?</p>
 <div class="section" id="room-prev">
 <h2><code class="docutils literal notranslate"><span class="pre">Room.prev</span></code><a class="headerlink" href="#room-prev" title="Permalink to this headline">¶</a></h2>
-<p>Take notice of line 12 of the code sample in <a class="reference internal" href="#bfs-review"><span class="std std-ref">A Review of BFS</span></a>. The same functionality appears on line 21 of <a class="reference internal" href="#implementation"><span class="std std-ref">Looking at an Implementation of BFS against an Adjacency List</span></a>.</p>
+<p>Take notice of line 12 of the code sample in <a class="reference internal" href="#bfs-review"><span class="std std-ref">A Review of Breadth-first Search</span></a>. The same functionality appears on line 21 of <a class="reference internal" href="#implementation"><span class="std std-ref">Looking at an Implementation of BFS against an Adjacency List</span></a>.</p>
 <p>Prior to adding new room to the <code class="docutils literal notranslate"><span class="pre">to_visit</span></code> queue, we note down that <code class="docutils literal notranslate"><span class="pre">Room</span></code> coordinates we’re in now. This way, we can walk back up the <code class="docutils literal notranslate"><span class="pre">Room.prev</span></code> recursively until we get to a <code class="docutils literal notranslate"><span class="pre">Room</span></code> where <code class="docutils literal notranslate"><span class="pre">.prev</span> <span class="pre">is</span> <span class="pre">None</span></code>.</p>
 </div>
 <div class="section" id="shortest-path">
@@ -378,8 +381,17 @@
 </div>
 <div class="section" id="the-maze-class">
 <h1>The <code class="docutils literal notranslate"><span class="pre">Maze</span></code> class<a class="headerlink" href="#the-maze-class" title="Permalink to this headline">¶</a></h1>
+<p>We have primarily looked at how we can approach this problem with a few functions.</p>
+<p>There is also a full <code class="docutils literal notranslate"><span class="pre">Maze</span></code> class that encapsulates this functionality.</p>
+<p>Let’s look at a few select methods:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The implementation of the <code class="docutils literal notranslate"><span class="pre">Maze</span></code> class can be found in <code class="docutils literal notranslate"><span class="pre">src/classymaze.py</span></code>.</p>
+</div>
+<div class="section" id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="as-ascii">
-<h2><code class="docutils literal notranslate"><span class="pre">.as_ascii()</span></code><a class="headerlink" href="#as-ascii" title="Permalink to this headline">¶</a></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">.as_ascii()</span></code><a class="headerlink" href="#as-ascii" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; tiny.as_ascii()
 ######
 #    #
@@ -389,13 +401,14 @@
 </div>
 </div>
 <div class="section" id="show-vertices">
-<h2><code class="docutils literal notranslate"><span class="pre">.show_vertices()</span></code><a class="headerlink" href="#show-vertices" title="Permalink to this headline">¶</a></h2>
+<h3><code class="docutils literal notranslate"><span class="pre">.show_vertices()</span></code><a class="headerlink" href="#show-vertices" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; tiny.show_vertices()
 (01, 01)(01, 02)(01, 03)(01, 04)
 (02, 01)        (02, 03)
 </pre></div>
 </div>
-<p>Shows the relationships between the rooms, using coords as an identifier.</p>
+<p>(This method helps show the relationships between the rooms using coords as an identifier.)</p>
+</div>
 </div>
 </div>
 <div class="section" id="resources">
