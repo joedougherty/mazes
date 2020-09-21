@@ -131,3 +131,108 @@ Here is the resulting Adjacency List for the ``tiny`` labyrinth (with some addit
 
 
 Are you starting to see how we can traverse this data structure?
+
+
+.. _bfs-review:
+
+---------------------------------
+A Review of Breadth-first Search
+---------------------------------
+
+`Wikipedia Pseudocode <https://en.wikipedia.org/wiki/Breadth-first_search#Pseudocode>`_:
+
+
+.. code-block:: text 
+  :linenos:
+
+    procedure BFS(G, root) is
+        let Q be a queue
+        label root as discovered	
+        Q.enqueue(root)			                              
+        while Q is not empty do
+            v := Q.dequeue()
+            if v is the goal then
+                return v
+            for all edges from v to w in G.adjacentEdges(v) do
+                if w is not labeled as discovered then
+                    label w as discovered
+                    w.parent := v
+                    Q.enqueue(w)
+
+
+Breadth-first Search:
+
+
+**A**. starts at the root node (lines 3,4)
+
+**B**. discovers neighboring nodes (lines 9-13)
+
+**C**. proceeds by visiting them and continuing this process until there are no new nodes left to discover and visit (line 5)
+
+
+.. _implementation:
+
+---------------------------------------------------------------
+Looking at an Implementation of BFS against an Adjacency List
+---------------------------------------------------------------
+
+
+Here's some sample code to compare it to the pseudocode above!
+
+
+.. code-block:: python
+   :linenos:
+
+    # Source: src/functionalish.py
+    def bfs(adjlist, start_coords, goal_coords):
+        to_visit = deque()
+        visited = set()
+
+        root = adjlist[start_coords]
+
+        to_visit.append(root)
+
+        while to_visit:
+            room = to_visit.popleft()
+            visited.add(room)
+
+            if room.coords == goal_coords:
+                return room
+
+            # Find adjacent edges that haven't been visited
+            for coords in room.neighbors:
+                next_room = adjlist[coords]
+                if next_room not in visited:
+                    next_room.prev = room
+                    to_visit.append(next_room)
+        return False
+
+
+---------------------------------------------------
+Side-by-Side comparison of Pseudocode to ``bfs()``
+---------------------------------------------------
+
+Some minor reformatting of the ``bfs()`` function helps to reveal significant similarity.
+
+
+.. code-block:: text
+
+    procedure BFS(G, root) is                                   |  def bfs(adjlist, start_coords, goal_coords):
+        let Q be a queue                                        |      to_visit, visited = deque(), set()
+        label root as discovered                                |      root = adjlist[start_coords]
+        Q.enqueue(root)                                         |      to_visit.append(root)
+                                                                |      
+                                                                |      
+        while Q is not empty do                                 |      while to_visit:
+            v := Q.dequeue()                                    |          room = to_visit.popleft()
+                                                                |		   visited.add(room)
+                                                                |
+            if v is the goal then                               |          if room.coords == goal.coords:
+                return v                                        |              return room 
+                                                                | 
+            for all edges from v to w in G.adjacentEdges(v) do  |          for coords in room.neighbors: 
+                                                                |              next_room = adjlist[coords]
+                if w is not labeled as discovered then          |              if next_room not in visited:  
+                    label w as discovered                       |                  next_room.prev = room
+                    w.parent := v                               |                  to_visit.append(next_room) 
+                    Q.enqueue(w)                                |
