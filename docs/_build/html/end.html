@@ -189,7 +189,7 @@
 <h1>Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code><a class="headerlink" href="#anatomy-of-a-room" title="Permalink to this headline">¶</a></h1>
 <p>What’s in an instance of a <code class="docutils literal notranslate"><span class="pre">Room</span></code> object, anyway?</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">.coords</span></code>: Its address as a tuple (<code class="docutils literal notranslate"><span class="pre">row</span></code>, <code class="docutils literal notranslate"><span class="pre">col</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.coords</span></code>: Its address as a tuple <code class="docutils literal notranslate"><span class="pre">(row,</span> <span class="pre">col)</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.neighbors</span></code>: A list of the <em>coordinates</em> of neighbors to the immediate North, East, West, or South. (No diagonal travel).</p></li>
 </ul>
 <p>There are also some derived attributes. The existence of a derived attribute on this class does <em>not</em> imply its usage or existence outside the scope of the object in its lifetime. That’s right, there may be attributes that simply don’t have a purpose yet.</p>

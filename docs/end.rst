@@ -4,7 +4,7 @@ Anatomy of a ``Room``
 
 What's in an instance of a ``Room`` object, anyway?
 
-+ ``.coords``: Its address as a tuple (``row``, ``col``).
++ ``.coords``: Its address as a tuple ``(row, col)``.
 + ``.neighbors``: A list of the *coordinates* of neighbors to the immediate North, East, West, or South. (No diagonal travel).
 
 
