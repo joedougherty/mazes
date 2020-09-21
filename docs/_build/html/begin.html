@@ -186,7 +186,7 @@
 <p>Before we dive in, let’s get some definitions squared away.</p>
 <div class="section" id="maze">
 <h2><strong>Maze</strong><a class="headerlink" href="#maze" title="Permalink to this headline">¶</a></h2>
-<p>In this context, a <strong>Maze</strong> is an two-dimensional area containing <em>at least two</em> connected <strong>Rooms</strong> that one must find a path through.</p>
+<p>In this context, a <strong>Maze</strong> is an two-dimensional area containing <em>at least two</em> connected <strong>Rooms</strong>. The idea is to find a path from a given start room to an end room.</p>
 </div>
 <div class="section" id="room">
 <h2><strong>Room</strong><a class="headerlink" href="#room" title="Permalink to this headline">¶</a></h2>
@@ -199,7 +199,6 @@
 <div class="section" id="path">
 <h2><strong>Path</strong><a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h2>
 <p>A list containing the coordinates of <strong>Rooms</strong> from the start to the end (ordering by convention).</p>
-<p>As a consequence, we don’t worry about diagonal movement on the grid.</p>
 </div>
 </div>
 <div class="section" id="lil-labyrinth-methods-of-maze-representation">
@@ -231,8 +230,8 @@
 <p>We can now see this maze consists of 6 rooms: <strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>.</p>
 <p>Once we convert this into an approriate data structure we can start to ask questions like:</p>
 <ul class="simple">
-<li><p>Does a path exist between two rooms?</p></li>
-<li><p>If so, what is the shortest route between them?</p></li>
+<li><p><em>Does a path exist between two rooms?</em></p></li>
+<li><p><em>If so, what is the shortest route between them?</em></p></li>
 </ul>
 <div class="section" id="network-diagram">
 <h2>Network Diagram<a class="headerlink" href="#network-diagram" title="Permalink to this headline">¶</a></h2>
@@ -248,6 +247,8 @@
 E       F
 </pre></div>
 </div>
+<p>This is largely a conceptual representation. There is no example object as it does not require implementation.</p>
+<p>However, we can start to see some logical structure inherent in this representation:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">A</span></code>’s neighbor(s): <code class="docutils literal notranslate"><span class="pre">B</span></code>, <code class="docutils literal notranslate"><span class="pre">E</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">B</span></code>’s neighbor(s): <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code></p></li>
@@ -256,7 +257,6 @@ E       F
 <li><p><code class="docutils literal notranslate"><span class="pre">E</span></code>’s neighbor(s): <code class="docutils literal notranslate"><span class="pre">A</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">F</span></code>’s neighbor(s): <code class="docutils literal notranslate"><span class="pre">C</span></code></p></li>
 </ul>
-<p>This is largely a conceptual representation. There is no example object as it does not require implementation.</p>
 </div>
 </div>
 <div class="section" id="adjacency-matrix">

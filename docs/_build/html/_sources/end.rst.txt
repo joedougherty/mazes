@@ -48,7 +48,7 @@ Here's some sample code to compare it to the pseudocode above!
 .. code-block:: python
    :linenos:
 
-    # Source: $ROOT/functionalish.py
+    # Source: src/functionalish.py
     def bfs(adjlist, start_coords, goal_coords):
         to_visit = deque()
         visited = set()
@@ -83,24 +83,27 @@ What's in an instance of a ``Room`` object, anyway?
 + ``.neighbors``: A list of the *coordinates* of neighbors to the immediate North, East, West, or South. (No diagonal travel).
 
 
-Setting ``.prev`` during traversal lets us back-track top find the shortest path from the Room we are seeking back to the start.
-
-+ ``.prev``: Reference to prev ``Room``
-+ ``.traversal_mode``: This flag controls the string representation of a ``Room`` instance. 
-
-This may sound strange. Why would we want that? 
-
-It can be helpful to know different aspects of the ``Room`` at different times, in different contexts. This somewhat unorthodox approach lets us change how a ``Room`` is ``print()``-ed. This will be of use later.
-
-When a ``Maze`` is instantiated, the ``Room`` instances that it is composed of will have ``.traversal_mode`` set to ``False``. It is only when we start looking for paths that this flag is set to ``True``.
-
 There are also some derived attributes. The existence of a derived attribute on this class does *not* imply its usage or existence outside the scope of the object in its lifetime. That's right, there may be attributes that simply don't have a purpose yet.
+
 
 + ``.row``: The row part of the coord.
 + ``.col``: The col part of the coord.
 + ``.is_intersection``: Does this room have more than 2 neighbors?
 + ``.is_dead_end``: Is there only one way in / out of this room?
 
+Last, but not least, are attributes that are used during the traversal (pathfinding) stage.
+
++ ``.prev``: Reference to prev ``Room``
++ ``.traversal_mode``: This flag controls the string representation of a ``Room`` instance. 
+
+
+"*This flag controls the string representation of a Room instance."* 
+
+This may sound strange. Why would we want that? 
+
+It can be helpful to know different aspects of the ``Room`` at different times, in different contexts. This somewhat unorthodox approach lets us change how a ``Room`` is ``print()``-ed based on the context we are in.
+
+When a ``Maze`` is instantiated, the ``Room`` instances that it is composed of will have ``.traversal_mode`` set to ``False``. It is only when we start looking for paths that this flag is set to ``True``.
 
 Here's the implementation:
 
@@ -223,8 +226,10 @@ Here is a simplified example to demonstrate the principle.
 
 
 -------------------
-Visualization
+The ``Maze`` class
 -------------------
+
+
 
 ++++++++++++++++
 ``.as_ascii()``

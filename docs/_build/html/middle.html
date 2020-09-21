@@ -85,7 +85,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation (Optional)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="begin.html">Defining Our Terms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="begin.html#lil-labyrinth-methods-of-maze-representation">‘Lil Labyrinth: Methods of Maze Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="begin.html#lil-labyrinth-methods-of-maze-representation">Lil’ Labyrinth: Methods of Maze Representation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">From an ASCII Maze to an Adjacency List</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#step-1-use-an-intermediate-form-maze-as-nested-list">Step 1: Use an intermediate form: Maze as Nested List</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#step-2-convert-maze-as-nested-list-to-an-adjacency-list">Step 2: Convert Maze as Nested List to an Adjacency List</a></li>
@@ -95,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="end.html#looking-at-an-implementation-of-bfs-against-an-adjacency-list">Looking at an Implementation of BFS against an Adjacency List</a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html#anatomy-of-a-room">Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html#pathfinding">Pathfinding</a></li>
-<li class="toctree-l1"><a class="reference internal" href="end.html#visualization">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="end.html#the-maze-class">The <code class="docutils literal notranslate"><span class="pre">Maze</span></code> class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html#resources">Resources</a></li>
 </ul>
 
@@ -170,7 +170,7 @@
 ######
 </pre></div>
 </div>
-<p>How can transform this string into an Adjacency List?</p>
+<p>How can we transform this string into an Adjacency List?</p>
 <div class="section" id="step-1-use-an-intermediate-form-maze-as-nested-list">
 <h2>Step 1: Use an intermediate form: Maze as Nested List<a class="headerlink" href="#step-1-use-an-intermediate-form-maze-as-nested-list" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tiny</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
@@ -181,7 +181,7 @@
 <span class="s1">&#39;&#39;&#39;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Let’s convert this ASCII maze, <code class="docutils literal notranslate"><span class="pre">tiny</span></code>  into a list of lists. Much nicer to work with.</p>
+<p>Let’s convert this ASCII maze, <code class="docutils literal notranslate"><span class="pre">tiny</span></code>,  into a list of lists.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">str2nested_list</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">delim</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delim</span><span class="p">)]</span>
 
@@ -190,7 +190,7 @@
 </pre></div>
 </div>
 <p>That was easy enough!</p>
-<p><code class="docutils literal notranslate"><span class="pre">tiny_nested_list</span></code>’s value is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">tiny_nested_list</span></code>’s value now is:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[[&#39;#&#39;, &#39;#&#39;, &#39;#&#39;, &#39;#&#39;, &#39;#&#39;, &#39;#&#39;],
  [&#39;#&#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39;#&#39;],
  [&#39;#&#39;, &#39; &#39;, &#39;#&#39;, &#39; &#39;, &#39;#&#39;, &#39;#&#39;],
@@ -206,17 +206,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">key</span></code> -&gt; coordinates of the room in the maze, expressed as a tuple (<code class="docutils literal notranslate"><span class="pre">row</span></code>, <code class="docutils literal notranslate"><span class="pre">col</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> -&gt; the <code class="docutils literal notranslate"><span class="pre">Room</span></code> instance of the current room. Each <code class="docutils literal notranslate"><span class="pre">Room</span></code> instance has a <code class="docutils literal notranslate"><span class="pre">.neighbors</span></code> attribute: a list of coordinates of neighboring cells that can be reached from this room.</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Helper functions</span>
-<span class="k">def</span> <span class="nf">discover_room</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nested_list</span><span class="p">):</span>
-    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nested_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nested_list</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">coords</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Source: src/functionalish.py</span>
+<span class="n">PATH</span><span class="p">,</span> <span class="n">WALL</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span>
 
-    <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">row</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">row</span> <span class="o">&gt;</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">col</span> <span class="o">&gt;</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span> <span class="c1"># bounds check</span>
-        <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">elif</span> <span class="n">nested_list</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">PATH</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">False</span>
 
 <span class="k">def</span> <span class="nf">find_neighbors</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nested_list</span><span class="p">):</span>
     <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">coords</span>
@@ -228,6 +220,19 @@
         <span class="n">discover_room</span><span class="p">((</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">nested_list</span><span class="p">),</span>  <span class="c1"># West</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">visited</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)]</span>
+
+
+<span class="k">def</span> <span class="nf">discover_room</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">nested_list</span><span class="p">):</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nested_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nested_list</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">coords</span>
+
+    <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">row</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">row</span> <span class="o">&gt;</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">col</span> <span class="o">&gt;</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">elif</span> <span class="n">nested_list</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">PATH</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
 
 <span class="k">def</span> <span class="nf">nested_list2adjlist</span><span class="p">(</span><span class="n">nested_list</span><span class="p">):</span>
     <span class="n">adjlist</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
@@ -241,15 +246,16 @@
     <span class="k">return</span> <span class="n">adjlist</span>
 </pre></div>
 </div>
-<p>Use the coords of the Room in question as the key. If that space has a room, it will provide the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object, which will contain <code class="docutils literal notranslate"><span class="pre">.neighbors</span></code>.</p>
+<p>Use the coords of the Room in question as the key.</p>
+<p>If that space has a room, it will provide the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object, which will contain <code class="docutils literal notranslate"><span class="pre">.neighbors</span></code>.</p>
 <p>Here is the resulting Adjacency List for the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> labyrinth (with some formatting):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">OrderedDict</span><span class="p">([</span>
-    <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-    <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-    <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-    <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-    <span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-    <span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>        <span class="c1"># A</span>
+    <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>        <span class="c1"># B</span>
+    <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="c1"># C</span>
+    <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>                 <span class="c1"># D</span>
+    <span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>                 <span class="c1"># E</span>
+    <span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>                  <span class="c1"># F</span>
 <span class="p">])</span>
 </pre></div>
 </div>

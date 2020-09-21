@@ -9,7 +9,7 @@ Before we dive in, let's get some definitions squared away.
 **Maze**
 ++++++++
 
-In this context, a **Maze** is an two-dimensional area containing *at least two* connected **Rooms** that one must find a path through.
+In this context, a **Maze** is an two-dimensional area containing *at least two* connected **Rooms**. The idea is to find a path from a given start room to an end room.
 
 ++++++++
 **Room**
@@ -27,8 +27,6 @@ In this context, a **Maze** is an two-dimensional area containing *at least two*
 ++++++++++
 
 A list containing the coordinates of **Rooms** from the start to the end (ordering by convention).
-
-As a consequence, we don't worry about diagonal movement on the grid. 
 
 
 ----------------------------------------------
@@ -76,8 +74,8 @@ We can now see this maze consists of 6 rooms: **A**, **B**, **C**, **D**, **E**,
 
 Once we convert this into an approriate data structure we can start to ask questions like:
 
-+ Does a path exist between two rooms?
-+ If so, what is the shortest route between them?
++ *Does a path exist between two rooms?*
++ *If so, what is the shortest route between them?*
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++
@@ -104,6 +102,10 @@ Example
     E       F
 
 
+This is largely a conceptual representation. There is no example object as it does not require implementation.
+
+However, we can start to see some logical structure inherent in this representation:
+
 + ``A``'s neighbor(s): ``B``, ``E``
 + ``B``'s neighbor(s): ``A``, ``C``
 + ``C``'s neighbor(s): ``B``, ``F``, ``D``
@@ -112,7 +114,6 @@ Example
 + ``F``'s neighbor(s): ``C``
 
 
-This is largely a conceptual representation. There is no example object as it does not require implementation.
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++

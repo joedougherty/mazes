@@ -12,7 +12,7 @@ From an ASCII Maze to an Adjacency List
     
 
 
-How can transform this string into an Adjacency List?
+How can we transform this string into an Adjacency List?
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -31,7 +31,7 @@ Step 1: Use an intermediate form: Maze as Nested List
 
 
 
-Let's convert this ASCII maze, ``tiny``  into a list of lists. Much nicer to work with.
+Let's convert this ASCII maze, ``tiny``,  into a list of lists.  
 
 
 .. code-block:: python
@@ -45,7 +45,7 @@ Let's convert this ASCII maze, ``tiny``  into a list of lists. Much nicer to wor
 
 That was easy enough!
 
-``tiny_nested_list``'s value is:
+``tiny_nested_list``'s value now is:
 
 .. code-block:: text
 
@@ -71,18 +71,10 @@ Here's the spec:
 .. code-block:: python
 
 
-    # Helper functions
-    def discover_room(coords, nested_list):
-        width, height = len(nested_list[0]), len(nested_list)
-        row, col = coords
+    # Source: src/functionalish.py
+    PATH, WALL = ' ', '#'
 
-        if any((row < 0, row > height - 1, col < 0, col > width - 1)): # bounds check
-            return False
-        elif nested_list[row][col] == PATH:
-            return (row, col)
-        else:
-            return False
-    
+
     def find_neighbors(coords, nested_list):
         row, col = coords
 
@@ -93,7 +85,20 @@ Here's the spec:
             discover_room((row, col + 1), nested_list),  # West
         )
         return [v for v in visited if isinstance(v, tuple)]
-     
+
+
+    def discover_room(coords, nested_list):
+        width, height = len(nested_list[0]), len(nested_list)
+        row, col = coords
+
+        if any((row < 0, row > height - 1, col < 0, col > width - 1)):
+            return False
+        elif nested_list[row][col] == PATH:
+            return (row, col)
+        else:
+            return False
+
+
     def nested_list2adjlist(nested_list):
         adjlist = OrderedDict()
 
@@ -106,20 +111,21 @@ Here's the spec:
         return adjlist
 
 
+Use the coords of the Room in question as the key. 
 
-Use the coords of the Room in question as the key. If that space has a room, it will provide the ``Room`` object, which will contain ``.neighbors``. 
+If that space has a room, it will provide the ``Room`` object, which will contain ``.neighbors``. 
 
 Here is the resulting Adjacency List for the ``tiny`` labyrinth (with some formatting):
 
 .. code-block:: python
 
     OrderedDict([
-        ((1, 1), Neighbors=[(2, 1), (1, 2)], Intersection=False, Dead End=False),
-        ((1, 2), Neighbors=[(1, 1), (1, 3)], Intersection=False, Dead End=False),
-        ((1, 3), Neighbors=[(2, 3), (1, 2), (1, 4)], Intersection=True, Dead End=False),
-        ((1, 4), Neighbors=[(1, 3)], Intersection=False, Dead End=True),
-        ((2, 1), Neighbors=[(1, 1)], Intersection=False, Dead End=True),
-        ((2, 3), Neighbors=[(1, 3)], Intersection=False, Dead End=True)
+        ((1, 1), Neighbors=[(2, 1), (1, 2)], Intersection=False, Dead End=False),        # A 
+        ((1, 2), Neighbors=[(1, 1), (1, 3)], Intersection=False, Dead End=False),        # B
+        ((1, 3), Neighbors=[(2, 3), (1, 2), (1, 4)], Intersection=True, Dead End=False), # C
+        ((1, 4), Neighbors=[(1, 3)], Intersection=False, Dead End=True),                 # D
+        ((2, 1), Neighbors=[(1, 1)], Intersection=False, Dead End=True),                 # E
+        ((2, 3), Neighbors=[(1, 3)], Intersection=False, Dead End=True)                  # F
     ])
 
 
