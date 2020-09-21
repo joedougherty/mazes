@@ -309,7 +309,7 @@ Visualization
 Searching and Pathfinding
 +++++++++++++++++++++++++
 
-``.bfs()```
+``.bfs()``
 ------------
 
 Uses breadth-first search to determine whether or not there is a path between a given start room ``(start_row, start_col)`` and a given goal room ``(goal_row, goal_col)``.
