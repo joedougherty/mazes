@@ -218,15 +218,22 @@
 <p>The wall blocks define our boundaries and thus determine which direction(s) we may travel.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We will not concern ourselves with diagonal travel. The only directions one can travel from a Room are North, East, West, and South.</p>
+<p>We will not concern ourselves with diagonal travel.</p>
+<p>The only directions one can travel from a Room are North, East, West, and South.</p>
 </div>
-<p>Assigning each room a unique identifier helps to clarify the relationships.</p>
+<p>Assigning each room a unique identifier helps to clarify which spots are part of the path. It also begins to clarify the relationships between them.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>######
 #ABCD#
 #E#F##
 ######
 </pre></div>
 </div>
+<p>We can now see this maze consists of 6 rooms: <strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>.</p>
+<p>Once we convert this into an approriate data structure we can start to ask questions like:</p>
+<ul class="simple">
+<li><p>Does a path exist between two rooms?</p></li>
+<li><p>If so, what is the shortest route between them?</p></li>
+</ul>
 <div class="section" id="network-diagram">
 <h2>Network Diagram<a class="headerlink" href="#network-diagram" title="Permalink to this headline">¶</a></h2>
 <p>Drawing this particular example as a network diagram does not reveal much we could not have seen in its previous form.</p>

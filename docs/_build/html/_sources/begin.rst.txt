@@ -52,11 +52,14 @@ Here is a small ASCII representation of a 2D labyrinth.
 
 The wall blocks define our boundaries and thus determine which direction(s) we may travel.
 
+
 .. NOTE::
-    We will not concern ourselves with diagonal travel. The only directions one can travel from a Room are North, East, West, and South.  
+    We will not concern ourselves with diagonal travel. 
+
+    The only directions one can travel from a Room are North, East, West, and South.  
 
 
-Assigning each room a unique identifier helps to clarify the relationships.
+Assigning each room a unique identifier helps to clarify which spots are part of the path. It also begins to clarify the relationships between them.
 
 
 .. code-block:: text
@@ -65,6 +68,16 @@ Assigning each room a unique identifier helps to clarify the relationships.
 	#ABCD#
 	#E#F##
 	######
+
+
+
+We can now see this maze consists of 6 rooms: **A**, **B**, **C**, **D**, **E**, **F**.
+
+
+Once we convert this into an approriate data structure we can start to ask questions like:
+
++ Does a path exist between two rooms?
++ If so, what is the shortest route between them?
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++
