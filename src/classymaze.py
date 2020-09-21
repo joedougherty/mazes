@@ -51,7 +51,7 @@ class Room:
 
     def __repr__(self):
         if self.traversal_mode and self.prev:
-            return f"""{self.prev} -> {self.coords}"""
+            return f"""{self.prev} <- {self.coords}"""
         elif self.traversal_mode and not self.prev:
             return f"""{self.coords}"""
         else:
