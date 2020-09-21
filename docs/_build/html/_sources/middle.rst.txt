@@ -165,7 +165,7 @@ Breadth-first Search:
 
 **A**. starts at the root node (lines 3,4)
 
-**B**. discovers neighboring nodes and adds unvisited nodes to the queue (lines 9-1)
+**B**. discovers neighboring nodes and adds unvisited nodes to the queue (lines 9-13)
 
 **C**. proceeds by visiting nodes in the queue and continuing this process until there are no new nodes left to discover and visit (line 5)
 
