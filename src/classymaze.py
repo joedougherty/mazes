@@ -1,11 +1,6 @@
-from blessings import Terminal
-
 from collections import OrderedDict, deque
 
 from mazeutils import str2nested_list, nested_list2str
-
-
-t = Terminal()
 
 
 class Room:
@@ -105,7 +100,7 @@ class Maze:
                 if col == self.wall:
                     new_row.append("#")
                 elif col == self.path and (r_idx, c_idx) in highlight_rooms:
-                    new_row.append(t.bright_red("*"))
+                    new_row.append("\x1b[1m\x1b[91m*\x1b(B\x1b[m"))
                 elif col == self.path:
                     new_row.append(" ")
                 else:
