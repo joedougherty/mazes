@@ -247,7 +247,7 @@
 </div>
 <div class="section" id="shortest-path">
 <h2><code class="docutils literal notranslate"><span class="pre">shortest_path()</span></code><a class="headerlink" href="#shortest-path" title="Permalink to this headline">¶</a></h2>
-<p>Passing the final <code class="docutils literal notranslate"><span class="pre">Room</span></code> to shortest path will the shortest way back to the start. It traverses the implicit linked list, pushing a reference to each item onto the return list.</p>
+<p>This will run a search via <code class="docutils literal notranslate"><span class="pre">bfs()</span></code> and use the reference to the goal room to extract and return the path beween <code class="docutils literal notranslate"><span class="pre">start_coords</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_coords</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="n">adjlist</span><span class="p">,</span> <span class="n">start_coords</span><span class="p">,</span> <span class="n">goal_coords</span><span class="p">,</span> <span class="n">root_to_leaf</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
 

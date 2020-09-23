@@ -90,8 +90,7 @@ Prior to adding new room to the ``to_visit`` queue, we note down that ``Room`` c
 +++++++++++++++++++
 
 
-Passing the final ``Room`` to shortest path will the shortest way back to the start. It traverses the implicit linked list, pushing a reference to each item onto the return list. 
-
+This will run a search via ``bfs()`` and use the reference to the goal room to extract and return the path beween ``start_coords`` and ``goal_coords``.
 
 .. code-block:: python
 
