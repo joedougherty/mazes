@@ -294,8 +294,11 @@ https://stackoverflow.com/questions/1984162/purpose-of-pythons-repro
 
 https://docs.python.org/3/reference/datamodel.html#object.__repr__
 
+
 Breadth-first search. (2020). Retrieved September 19, from https://en.wikipedia.org/wiki/Breadth-first_search. 
 
 
 Skiena, S. (2008) *The Algorithm Design Manual* IBSN: 9781848000698
 
+
+Ericson, J. (2019) *Algorithms* https://jeffe.cs.illinois.edu/teaching/algorithms/book/08-sssp.pdf (pgs. 278-282)
