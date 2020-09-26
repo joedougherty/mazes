@@ -1,5 +1,6 @@
 from mazeutils import str2nested_list, nested_list2str
 from classydemo import demo
+from functionalishdemo import good_path, bad_path
 
 def test_str_expansion_ints():
     s = '12345'
@@ -31,3 +32,9 @@ def test_demo_works_one():
 
 def test_demo_works_two():
     assert demo.shortest_path((1,1),(1,4)) ==  [(1, 1), (1, 2), (1, 3), (1, 4)]
+
+def test_fn_demo_works_one():
+    assert good_path != False
+
+def test_fn_demo_works_two():
+    assert bad_path == False
