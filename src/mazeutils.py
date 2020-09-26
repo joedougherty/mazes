@@ -1,8 +1,3 @@
-'''
-In general:
-    str2nested_list(nested_list2str(X)) == nested_list2str(str2nested_list(X))
-'''
-
 def str2nested_list(s, delim='\n'):
     return [list(e) for e in s.split(delim)]
 

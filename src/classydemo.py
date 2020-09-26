@@ -1,14 +1,8 @@
 from classymaze import Maze
+from labyrinth import tiny, medium, big
 
 
 PATH, WALL = ' ', '#'
-
-tiny = '''
-######
-#    #
-# # ##
-######
-'''.strip()
 
 
 demo = Maze(tiny, path=PATH, wall=WALL)

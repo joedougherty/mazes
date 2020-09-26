@@ -1,5 +1,5 @@
 from itertools import count
-from collections import OrderedDict
+from collections import OrderedDict, deque
 
 
 from classymaze import Room

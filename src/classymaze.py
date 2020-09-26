@@ -19,7 +19,7 @@ class Room:
     :param col: Col ID
     :type  col: int
 
-    :param is_intersection: Does this room have more than 2 neighors?
+    :param is_intersection: Does this room have more than 2 neighbors?
     :type  is_intersection: bool
 
     :param is_dead_end: Does this room have exactly one neighbor?
