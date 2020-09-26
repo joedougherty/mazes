@@ -8,4 +8,5 @@ PATH, WALL = ' ', '#'
 
 
 adjlist = nested_list2adjlist(str2nested_list(tiny))
-path = bfs(adjlist, (1,1), (2,3))
+good_path = bfs(adjlist, (1,1), (2,3))
+bad_path = bfs(adjlist, (1,1), (4,3))
