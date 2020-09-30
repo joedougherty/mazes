@@ -82,8 +82,12 @@
               
             
             
-              <ul class="current">
+              <p class="caption"><span class="caption-text">Prerequisites</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation (Optional)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C'mon in!</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Defining Our Terms</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#maze"><strong>Maze</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#room"><strong>Room</strong></a></li>
@@ -109,12 +113,19 @@
 <li class="toctree-l2"><a class="reference internal" href="#choosing-a-method">Choosing a Method</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">Get lost for a while...</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="middle.html">From an ASCII Maze to an Adjacency List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="end.html">A Review of BFS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="end.html#looking-at-an-implementation-of-bfs-against-an-adjacency-list">Looking at an Implementation of BFS against an Adjacency List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="end.html#anatomy-of-a-room">Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="end.html#pathfinding">Pathfinding</a></li>
-<li class="toctree-l1"><a class="reference internal" href="end.html#visualization">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="middle.html#a-review-of-breadth-first-search">A Review of Breadth-first Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="middle.html#looking-at-an-implementation-of-bfs-against-an-adjacency-list">Looking at an Implementation of BFS against an Adjacency List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="middle.html#side-by-side-comparison-of-pseudocode-to-bfs">Side-by-Side comparison of Pseudocode to <code class="docutils literal notranslate"><span class="pre">bfs()</span></code></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Find your way out again.</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="end.html">Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="end.html#path-finding">Path-finding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="end.html#the-maze-class">The <code class="docutils literal notranslate"><span class="pre">Maze</span></code> class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html#resources">Resources</a></li>
 </ul>
 
@@ -228,7 +239,7 @@
 </pre></div>
 </div>
 <p>We can now see this maze consists of 6 rooms: <strong>A</strong>, <strong>B</strong>, <strong>C</strong>, <strong>D</strong>, <strong>E</strong>, <strong>F</strong>.</p>
-<p>Once we convert this into an approriate data structure we can start to ask questions like:</p>
+<p>Once we convert this into an appropriate data structure we can start to ask questions like:</p>
 <ul class="simple">
 <li><p><em>Does a path exist between two rooms?</em></p></li>
 <li><p><em>If so, what is the shortest route between them?</em></p></li>
@@ -289,7 +300,7 @@ E       F
 <p class="admonition-title">Attention</p>
 <p>Note that this representation repeats information. Each (possible) node connection is specified twice.</p>
 </div>
-<p>Ajdacency Matrices make it fast and easy to determine if nodes are <em>self-referential</em>. Look down the diagonal from the upper-left corner of the matrix down the lower-right corner. Notice that all the values are <code class="docutils literal notranslate"><span class="pre">0</span></code>. This means that no nodes intersect with themselves. In other words, each node only connects to other nodes.</p>
+<p>Adjacency Matrices make it fast and easy to determine if nodes are <em>self-referential</em>. Look down the diagonal from the upper-left corner of the matrix down the lower-right corner. Notice that all the values are <code class="docutils literal notranslate"><span class="pre">0</span></code>. This means that no nodes intersect with themselves. In other words, each node only connects to other nodes.</p>
 </div>
 </div>
 <div class="section" id="adjacency-list">

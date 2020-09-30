@@ -100,7 +100,7 @@
 <p class="caption"><span class="caption-text">Find your way out again.</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="#pathfinding">Pathfinding</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="#path-finding">Path-finding</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#room-prev"><code class="docutils literal notranslate"><span class="pre">Room.prev</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shortest-path"><code class="docutils literal notranslate"><span class="pre">shortest_path()</span></code></a></li>
 </ul>
@@ -199,9 +199,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">.is_intersection</span></code>: Does this room have more than 2 neighbors?</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.is_dead_end</span></code>: Is there only one way in / out of this room?</p></li>
 </ul>
-<p>Last, but not least, are attributes that are used during the traversal (pathfinding) stage.</p>
+<p>Last, but not least, are attributes that are used during the traversal (path-finding) stage.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">.prev</span></code>: Reference to prev <code class="docutils literal notranslate"><span class="pre">Room</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.prev</span></code>: Reference to the previous <code class="docutils literal notranslate"><span class="pre">Room</span></code> instance</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.traversal_mode</span></code>: This flag controls the string representation of a <code class="docutils literal notranslate"><span class="pre">Room</span></code> instance.</p></li>
 </ul>
 <p>“<em>This flag controls the string representation of a Room instance.”</em></p>
@@ -236,8 +236,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="pathfinding">
-<h1>Pathfinding<a class="headerlink" href="#pathfinding" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="path-finding">
+<h1>Path-finding<a class="headerlink" href="#path-finding" title="Permalink to this headline">¶</a></h1>
 <p>This <code class="docutils literal notranslate"><span class="pre">bfs()</span></code> function returns a reference to the found room (if, you know, it’s found).</p>
 <p>How can we use this to find a path back to the start?</p>
 <div class="section" id="room-prev">
@@ -247,7 +247,7 @@
 </div>
 <div class="section" id="shortest-path">
 <h2><code class="docutils literal notranslate"><span class="pre">shortest_path()</span></code><a class="headerlink" href="#shortest-path" title="Permalink to this headline">¶</a></h2>
-<p>This will run a search via <code class="docutils literal notranslate"><span class="pre">bfs()</span></code> and use the reference to the goal room to extract and return the path beween <code class="docutils literal notranslate"><span class="pre">start_coords</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_coords</span></code>.</p>
+<p>This will run a search via <code class="docutils literal notranslate"><span class="pre">bfs()</span></code> and use the reference to the goal room to extract and return the path between <code class="docutils literal notranslate"><span class="pre">start_coords</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_coords</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="n">adjlist</span><span class="p">,</span> <span class="n">start_coords</span><span class="p">,</span> <span class="n">goal_coords</span><span class="p">,</span> <span class="n">root_to_leaf</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
 

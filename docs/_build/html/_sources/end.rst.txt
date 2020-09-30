@@ -16,9 +16,9 @@ There are also some derived attributes. The existence of a derived attribute on 
 + ``.is_intersection``: Does this room have more than 2 neighbors?
 + ``.is_dead_end``: Is there only one way in / out of this room?
 
-Last, but not least, are attributes that are used during the traversal (pathfinding) stage.
+Last, but not least, are attributes that are used during the traversal (path-finding) stage.
 
-+ ``.prev``: Reference to prev ``Room``
++ ``.prev``: Reference to the previous ``Room`` instance 
 + ``.traversal_mode``: This flag controls the string representation of a ``Room`` instance. 
 
 
@@ -63,7 +63,7 @@ Here's the implementation:
 
 
 -------------------
-Pathfinding
+Path-finding
 -------------------
 
 
@@ -90,7 +90,7 @@ Prior to adding new room to the ``to_visit`` queue, we note down that ``Room`` c
 +++++++++++++++++++
 
 
-This will run a search via ``bfs()`` and use the reference to the goal room to extract and return the path beween ``start_coords`` and ``goal_coords``.
+This will run a search via ``bfs()`` and use the reference to the goal room to extract and return the path between ``start_coords`` and ``goal_coords``.
 
 .. code-block:: python
 

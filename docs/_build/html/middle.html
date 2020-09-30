@@ -105,7 +105,7 @@
 <p class="caption"><span class="caption-text">Find your way out again.</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="end.html">Anatomy of a <code class="docutils literal notranslate"><span class="pre">Room</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="end.html#pathfinding">Pathfinding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="end.html#path-finding">Path-finding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html#the-maze-class">The <code class="docutils literal notranslate"><span class="pre">Maze</span></code> class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="end.html#resources">Resources</a></li>
 </ul>
@@ -259,7 +259,7 @@
 </div>
 <p>Use the coords of the Room in question as the key.</p>
 <p>If that space has a room, it will provide the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object, which will contain <code class="docutils literal notranslate"><span class="pre">.neighbors</span></code>.</p>
-<p>Here is the resulting Adjacency List for the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> labyrinth (with some additonal formatting for readability):</p>
+<p>Here is the resulting Adjacency List for the <code class="docutils literal notranslate"><span class="pre">tiny</span></code> labyrinth (with some additional formatting for readability):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">OrderedDict</span><span class="p">([</span>
     <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>        <span class="c1"># A</span>
     <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Neighbors</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)],</span> <span class="n">Intersection</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Dead</span> <span class="n">End</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>        <span class="c1"># B</span>

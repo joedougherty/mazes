@@ -115,7 +115,7 @@ Use the coords of the Room in question as the key.
 
 If that space has a room, it will provide the ``Room`` object, which will contain ``.neighbors``. 
 
-Here is the resulting Adjacency List for the ``tiny`` labyrinth (with some additional formatting for readability):
+Here is the resulting Adjacency List for the ``tiny`` labyrinth (with some additonal formatting for readability):
 
 .. code-block:: python
 

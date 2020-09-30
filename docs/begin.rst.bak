@@ -72,7 +72,7 @@ Assigning each room a unique identifier helps to clarify which spots are part of
 We can now see this maze consists of 6 rooms: **A**, **B**, **C**, **D**, **E**, **F**.
 
 
-Once we convert this into an appropriate data structure we can start to ask questions like:
+Once we convert this into an approriate data structure we can start to ask questions like:
 
 + *Does a path exist between two rooms?*
 + *If so, what is the shortest route between them?*
@@ -157,7 +157,7 @@ The cells ``adj_matrix[0][4]`` and ``adj_matrix[4][0]`` both contain ``1`` -- th
     Note that this representation repeats information. Each (possible) node connection is specified twice.
 
 
-Adjacency Matrices make it fast and easy to determine if nodes are *self-referential*. Look down the diagonal from the upper-left corner of the matrix down the lower-right corner. Notice that all the values are ``0``. This means that no nodes intersect with themselves. In other words, each node only connects to other nodes.
+Ajdacency Matrices make it fast and easy to determine if nodes are *self-referential*. Look down the diagonal from the upper-left corner of the matrix down the lower-right corner. Notice that all the values are ``0``. This means that no nodes intersect with themselves. In other words, each node only connects to other nodes.
 
 
 
